@@ -61,6 +61,7 @@ const webpackConfig = mode => {
         pages: path.join(__dirname, 'src/pages'),
         images: path.join(__dirname, 'src/images'),
         icons: path.join(__dirname, 'src/icons'),
+        'react-dom': '@hot-loader/react-dom',
       },
       extensions: ['*', '.js', '.jsx'],
     },
@@ -119,6 +120,7 @@ const webpackConfig = mode => {
       port: 3000,
       // publicPath: `${publicPath}`,
       hot: true,
+      historyApiFallback: true,
     },
     plugins,
   }

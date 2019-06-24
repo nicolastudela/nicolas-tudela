@@ -1,19 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Box } from '@smooth-ui/core-em'
 import { TitleAndSubtitle, ContentPanel } from 'components'
 import workingNico from 'images/working-nico-lg.jpg'
 import backgrKeyword from 'images/backgr-keyword.jpg'
-import useMediaQuery from 'components/utils/useMediaQuery'
+import { useClientDeviceType } from 'components/utils/useClientDeviceType'
 
 const Home = () => {
-  const isMobile = useMediaQuery({ action: 'down', breakpoints: ['sm'] })
-
-  // console.log(theme.breakpoints.up('sm'))
-  // console.log(theme.breakpoints.down('sm'))
-  // console.log(theme.breakpoints.only('sm'))
-  // console.log(theme.breakpoints.between('sm', 'md'))
-  /* <Resume toggleLoading={toggleLoading} /> */
-  /* <ReuseComponentsLogic toggleLoading={toggleLoading} /> */
+  const { isMobile, isDesktop } = useClientDeviceType()
 
   return (
     <>
@@ -27,34 +20,38 @@ const Home = () => {
         backgroundImage="url(http://musicments.com/img/d_default/work-desk-background/work-desk-background-concept-5c7472acb9eb5.jpg);"
         backgroundPosition="center"
       >
-        {({ color }) =>
-          !isMobile ? (
-            <>
-              <Box width={4 / 6} m="auto">
+        {({ color }) => {
+          if (isDesktop)
+            return (
+              <>
+                <Box width={4 / 6} m="auto">
+                  <TitleAndSubtitle
+                    subtitle="I'm here to create meaningful and lasting relationships with my clients."
+                    title="LET'S BUILD SOMETHING AMAZING TOGETHER"
+                    color={color}
+                  />
+                </Box>
+                <Box width={2 / 6}>
+                  <img
+                    style={{ width: '100%', height: '100%' }}
+                    src={workingNico}
+                    alt="nico"
+                  />
+                </Box>
+              </>
+            )
+          if (isMobile)
+            return (
+              <Box width={1}>
                 <TitleAndSubtitle
                   subtitle="I'm here to create meaningful and lasting relationships with my clients."
                   title="LET'S BUILD SOMETHING AMAZING TOGETHER"
                   color={color}
                 />
               </Box>
-              <Box width={2 / 6}>
-                <img
-                  style={{ width: '100%', height: '100%' }}
-                  src={workingNico}
-                  alt="nico"
-                />
-              </Box>
-            </>
-          ) : (
-            <Box width={1}>
-              <TitleAndSubtitle
-                subtitle="I'm here to create meaningful and lasting relationships with my clients."
-                title="LET'S BUILD SOMETHING AMAZING TOGETHER"
-                color={color}
-              />
-            </Box>
-          )
-        }
+            )
+          return null
+        }}
       </ContentPanel>
       <ContentPanel
         color="black"

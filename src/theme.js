@@ -10,6 +10,12 @@ spaces.xl = 32
 spaces.xxl = 64
 
 const { breakpoints } = theme
+breakpoints.xs = 0
+breakpoints.sm = 600
+breakpoints.md = 990
+breakpoints.lg = 1280
+breakpoints.xl = 1920
+
 const enhancedBreakpoints = {
   ...breakpoints,
   ...themeBreakpointsEnhancer(breakpoints),

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Box, Typography } from '@smooth-ui/core-em'
 import PropTypes from 'prop-types'
-import useMediaQuery from 'components/utils/useMediaQuery'
+import { useClientDeviceType } from 'components/utils/useClientDeviceType'
 
 const CustomNavLink = ({ onmouseLeave, name, selected, ...rest }) => {
   const custom = {
@@ -39,7 +39,7 @@ CustomNavLink.defaultProps = {
 
 const AppBarNavigation = props => {
   const [selectedLink, setSelectedLink] = useState(null)
-  const isMobile = useMediaQuery({ action: 'down', breakpoints: ['sm'] })
+  const { isMobile } = useClientDeviceType()
 
   return !isMobile ? (
     <Box {...props}>
