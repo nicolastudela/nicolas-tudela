@@ -6,7 +6,7 @@ import backgrKeyword from 'images/backgr-keyword.jpg'
 import { useClientDeviceType } from 'components/utils/useClientDeviceType'
 
 const Home = () => {
-  const { isMobile, isDesktop } = useClientDeviceType()
+  const { isMobile } = useClientDeviceType()
 
   return (
     <>
@@ -21,36 +21,32 @@ const Home = () => {
         backgroundPosition="center"
       >
         {({ color }) => {
-          if (isDesktop)
-            return (
-              <>
-                <Box width={4 / 6} m="auto">
-                  <TitleAndSubtitle
-                    subtitle="I'm here to create meaningful and lasting relationships with my clients."
-                    title="LET'S BUILD SOMETHING AMAZING TOGETHER"
-                    color={color}
-                  />
-                </Box>
-                <Box width={2 / 6}>
-                  <img
-                    style={{ width: '100%', height: '100%' }}
-                    src={workingNico}
-                    alt="nico"
-                  />
-                </Box>
-              </>
-            )
-          if (isMobile)
-            return (
-              <Box width={1}>
+          return !isMobile ? (
+            <>
+              <Box width={4 / 6} m="auto">
                 <TitleAndSubtitle
                   subtitle="I'm here to create meaningful and lasting relationships with my clients."
                   title="LET'S BUILD SOMETHING AMAZING TOGETHER"
                   color={color}
                 />
               </Box>
-            )
-          return null
+              <Box width={2 / 6}>
+                <img
+                  style={{ width: '100%', height: '100%' }}
+                  src={workingNico}
+                  alt="nico"
+                />
+              </Box>
+            </>
+          ) : (
+            <Box width={1}>
+              <TitleAndSubtitle
+                subtitle="I'm here to create meaningful and lasting relationships with my clients."
+                title="LET'S BUILD SOMETHING AMAZING TOGETHER"
+                color={color}
+              />
+            </Box>
+          )
         }}
       </ContentPanel>
       <ContentPanel
@@ -79,6 +75,52 @@ const Home = () => {
         )}
       </ContentPanel>
 
+      <ContentPanel color="lightBlue">
+        {({ color }) => (
+          <TitleAndSubtitle
+            subtitle="I'm here to create meaningful and lasting relationships with my clients."
+            title="LET'S BUILD SOMETHING AMAZING TOGETHER"
+            color={color}
+          />
+        )}
+      </ContentPanel>
+
+      <ContentPanel color="lightBlue">
+        {({ color }) => (
+          <TitleAndSubtitle
+            subtitle="I'm here to create meaningful and lasting relationships with my clients."
+            title="LET'S BUILD SOMETHING AMAZING TOGETHER"
+            color={color}
+          />
+        )}
+      </ContentPanel>
+      <ContentPanel color="lightBlue">
+        {({ color }) => (
+          <TitleAndSubtitle
+            subtitle="I'm here to create meaningful and lasting relationships with my clients."
+            title="LET'S BUILD SOMETHING AMAZING TOGETHER"
+            color={color}
+          />
+        )}
+      </ContentPanel>
+      <ContentPanel color="lightBlue">
+        {({ color }) => (
+          <TitleAndSubtitle
+            subtitle="I'm here to create meaningful and lasting relationships with my clients."
+            title="LET'S BUILD SOMETHING AMAZING TOGETHER"
+            color={color}
+          />
+        )}
+      </ContentPanel>
+      <ContentPanel color="lightBlue">
+        {({ color }) => (
+          <TitleAndSubtitle
+            subtitle="I'm here to create meaningful and lasting relationships with my clients."
+            title="LET'S BUILD SOMETHING AMAZING TOGETHER"
+            color={color}
+          />
+        )}
+      </ContentPanel>
       <ContentPanel color="lightBlue">
         {({ color }) => (
           <TitleAndSubtitle

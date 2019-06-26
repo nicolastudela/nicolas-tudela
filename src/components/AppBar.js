@@ -1,9 +1,8 @@
 import React from 'react'
 import { Breakpoint, Box, Typography } from '@smooth-ui/core-em'
 import { keyframes } from '@emotion/core'
-import AppBarNavigation from './AppBarNavigation'
-
 import football from 'icons/football.svg'
+import AppBarNavigation from './AppBarNavigation'
 import useScrollTrigger from './utils/useScrollTrigger'
 
 const rotating = keyframes({
