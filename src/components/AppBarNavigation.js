@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
-import { Box, Typography } from '@smooth-ui/core-em'
+import { NavLink, Link } from 'react-router-dom'
+import Drawer from '@material-ui/core/Drawer'
+import { Box, Button, Typography } from '@smooth-ui/core-em'
 import PropTypes from 'prop-types'
-import useMediaQuery from 'components/utils/useMediaQuery'
+import { useClientDeviceType } from 'components/utils/useClientDeviceType'
+import sandwichIcon from 'icons/baseline-reorder-24px.svg'
 
 const CustomNavLink = ({ onmouseLeave, name, selected, ...rest }) => {
   const custom = {
@@ -13,6 +15,7 @@ const CustomNavLink = ({ onmouseLeave, name, selected, ...rest }) => {
 
   return (
     <CustomLink
+      key={name}
       css={custom}
       fontFamily="'Lobster',cursive"
       color="white"
@@ -23,6 +26,7 @@ const CustomNavLink = ({ onmouseLeave, name, selected, ...rest }) => {
       fontSize="1.5vw"
       onMouseEnter={() => onmouseLeave(name)}
       onMouseLeave={() => onmouseLeave(null)}
+      exact
     />
   )
 }
@@ -37,55 +41,104 @@ CustomNavLink.defaultProps = {
   selected: null,
 }
 
-const AppBarNavigation = props => {
+const CustomNavButton = ({ name, label, onClick, ...rest }) => {
+  const CustomButton = Button.withComponent(NavLink)
+
+  return (
+    <CustomButton
+      activeStyle={{ color: 'lightBlue' }}
+      color="white"
+      variant="secondary"
+      {...rest}
+      fontSize="3rem"
+      fontFamily="'Lobster',cursive"
+      textAlign="center"
+      width={1}
+      exact
+      onClick={onClick}
+    >
+      {label}
+    </CustomButton>
+  )
+}
+
+const navLinks = [
+  {
+    name: 'home',
+    link: '/',
+    label: 'Home',
+  },
+  {
+    name: 'about',
+    link: '/about',
+    label: 'About',
+  },
+  {
+    name: 'resume',
+    link: '/resume',
+    label: 'Resume',
+  },
+  {
+    name: 'contact',
+    link: '/contact',
+    label: 'Contact',
+  },
+  {
+    name: 'blog',
+    link: '/blog',
+    label: 'blog',
+  },
+]
+
+const AppBarNavigation = () => {
   const [selectedLink, setSelectedLink] = useState(null)
-  const isMobile = useMediaQuery({ action: 'down', breakpoints: ['sm'] })
+  const [openDrawer, setOpenDrawer] = useState(false)
+  const { isMobile } = useClientDeviceType()
+
+  const toggleDrawer = open => event => {
+    if (
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
+    ) {
+      return
+    }
+
+    setOpenDrawer(open)
+  }
 
   return !isMobile ? (
-    <Box {...props}>
-      <CustomNavLink
-        name="home"
-        selected={selectedLink}
-        onmouseLeave={setSelectedLink}
-        exact
-        to="/"
-      >
-        Home
-      </CustomNavLink>
-      <CustomNavLink
-        name="about"
-        selected={selectedLink}
-        onmouseLeave={setSelectedLink}
-        to="/about"
-      >
-        About
-      </CustomNavLink>
-      <CustomNavLink
-        name="resume"
-        selected={selectedLink}
-        onmouseLeave={setSelectedLink}
-        to="/resume"
-      >
-        Resume
-      </CustomNavLink>
-      <CustomNavLink
-        name="contact"
-        selected={selectedLink}
-        onmouseLeave={setSelectedLink}
-        to="/contact"
-      >
-        Contact
-      </CustomNavLink>
-      <CustomNavLink
-        name="blog"
-        selected={selectedLink}
-        onmouseLeave={setSelectedLink}
-        to="/blog"
-      >
-        Blog
-      </CustomNavLink>
+    <Box>
+      {navLinks.map(({ name, link, label }) => (
+        <CustomNavLink
+          key={name}
+          name={name}
+          selected={selectedLink}
+          onmouseLeave={setSelectedLink}
+          to={link}
+        >
+          {label}
+        </CustomNavLink>
+      ))}
     </Box>
-  ) : null
+  ) : (
+    <>
+      <Drawer anchor="top" open={openDrawer} onClose={toggleDrawer(false)}>
+        {navLinks.map(({ name, link, label }) => (
+          <CustomNavButton
+            key={name}
+            name={name}
+            selected={selectedLink}
+            to={link}
+            label={label}
+            onClick={toggleDrawer(false)}
+          />
+        ))}
+      </Drawer>
+      <Box onClick={toggleDrawer(true)}>
+        <img width="70px" src={sandwichIcon} alt="sandwichico" />
+      </Box>
+    </>
+  )
 }
 
 export default AppBarNavigation

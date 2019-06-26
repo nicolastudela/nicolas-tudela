@@ -1,19 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Box } from '@smooth-ui/core-em'
 import { TitleAndSubtitle, ContentPanel } from 'components'
 import workingNico from 'images/working-nico-lg.jpg'
 import backgrKeyword from 'images/backgr-keyword.jpg'
-import useMediaQuery from 'components/utils/useMediaQuery'
+import { useClientDeviceType } from 'components/utils/useClientDeviceType'
 
 const Home = () => {
-  const isMobile = useMediaQuery({ action: 'down', breakpoints: ['sm'] })
-
-  // console.log(theme.breakpoints.up('sm'))
-  // console.log(theme.breakpoints.down('sm'))
-  // console.log(theme.breakpoints.only('sm'))
-  // console.log(theme.breakpoints.between('sm', 'md'))
-  /* <Resume toggleLoading={toggleLoading} /> */
-  /* <ReuseComponentsLogic toggleLoading={toggleLoading} /> */
+  const { isMobile } = useClientDeviceType()
 
   return (
     <>
@@ -27,8 +20,8 @@ const Home = () => {
         backgroundImage="url(http://musicments.com/img/d_default/work-desk-background/work-desk-background-concept-5c7472acb9eb5.jpg);"
         backgroundPosition="center"
       >
-        {({ color }) =>
-          !isMobile ? (
+        {({ color }) => {
+          return !isMobile ? (
             <>
               <Box width={4 / 6} m="auto">
                 <TitleAndSubtitle
@@ -54,7 +47,7 @@ const Home = () => {
               />
             </Box>
           )
-        }
+        }}
       </ContentPanel>
       <ContentPanel
         color="black"
@@ -82,6 +75,52 @@ const Home = () => {
         )}
       </ContentPanel>
 
+      <ContentPanel color="lightBlue">
+        {({ color }) => (
+          <TitleAndSubtitle
+            subtitle="I'm here to create meaningful and lasting relationships with my clients."
+            title="LET'S BUILD SOMETHING AMAZING TOGETHER"
+            color={color}
+          />
+        )}
+      </ContentPanel>
+
+      <ContentPanel color="lightBlue">
+        {({ color }) => (
+          <TitleAndSubtitle
+            subtitle="I'm here to create meaningful and lasting relationships with my clients."
+            title="LET'S BUILD SOMETHING AMAZING TOGETHER"
+            color={color}
+          />
+        )}
+      </ContentPanel>
+      <ContentPanel color="lightBlue">
+        {({ color }) => (
+          <TitleAndSubtitle
+            subtitle="I'm here to create meaningful and lasting relationships with my clients."
+            title="LET'S BUILD SOMETHING AMAZING TOGETHER"
+            color={color}
+          />
+        )}
+      </ContentPanel>
+      <ContentPanel color="lightBlue">
+        {({ color }) => (
+          <TitleAndSubtitle
+            subtitle="I'm here to create meaningful and lasting relationships with my clients."
+            title="LET'S BUILD SOMETHING AMAZING TOGETHER"
+            color={color}
+          />
+        )}
+      </ContentPanel>
+      <ContentPanel color="lightBlue">
+        {({ color }) => (
+          <TitleAndSubtitle
+            subtitle="I'm here to create meaningful and lasting relationships with my clients."
+            title="LET'S BUILD SOMETHING AMAZING TOGETHER"
+            color={color}
+          />
+        )}
+      </ContentPanel>
       <ContentPanel color="lightBlue">
         {({ color }) => (
           <TitleAndSubtitle

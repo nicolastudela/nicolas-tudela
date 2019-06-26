@@ -1,5 +1,5 @@
 import React from 'react'
-import { ContentPanel } from 'components'
+import ContentPanel from 'components/ContentPanel'
 
 const Footer = () => <ContentPanel> This is the footer </ContentPanel>
 

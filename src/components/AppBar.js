@@ -1,9 +1,8 @@
 import React from 'react'
 import { Breakpoint, Box, Typography } from '@smooth-ui/core-em'
 import { keyframes } from '@emotion/core'
-import { AppBarNavigation } from 'components'
-
 import football from 'icons/football.svg'
+import AppBarNavigation from './AppBarNavigation'
 import useScrollTrigger from './utils/useScrollTrigger'
 
 const rotating = keyframes({
@@ -69,7 +68,7 @@ const AppBar = props => {
               Nicolas Jose Tudela
             </Typography>
             {!scrolled && (
-              <Breakpoint up="lg">
+              <Breakpoint up="md">
                 <Typography
                   color="white"
                   fontFamily="'Lobster',cursive"

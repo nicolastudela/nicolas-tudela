@@ -5,6 +5,7 @@
  * Replicated from Material UI, where I find it very usefull and couldn't see an easy way 
  * to import only this functionality
  * 
+ * @see https://github.com/mui-org/material-ui/blob/master/packages/material-ui/src/styles/createBreakpoints.js
  * @see useMediaQuery
  */
 const themeBreakpointsEnhancer = breakpoints => {
@@ -14,7 +15,7 @@ const themeBreakpointsEnhancer = breakpoints => {
   enhancement.unit = 'px'
 
   enhancement.up = key => {
-    const value = enhancement[key]
+    const value = breakpoints[key]
     return `@media (min-width:${value}px)`
   }
 
@@ -22,7 +23,6 @@ const themeBreakpointsEnhancer = breakpoints => {
     const { keys } = enhancement
     const endIndex = keys.indexOf(key) + 1
     const upperbound = breakpoints[keys[endIndex]]
-
     if (endIndex === keys.length) {
       // xl down applies to all sizes
       return enhancement.up('xs')
@@ -30,9 +30,7 @@ const themeBreakpointsEnhancer = breakpoints => {
 
     const value =
       typeof upperbound === 'number' && endIndex > 0 ? upperbound : key
-    return `@media (max-width:${value - enhancement.step / 100}${
-      enhancement.unit
-    })`
+    return `@media (max-width:${value - enhancement.step / 100}px)`
   }
 
   enhancement.between = (start, end) => {
@@ -44,10 +42,8 @@ const themeBreakpointsEnhancer = breakpoints => {
     }
 
     return (
-      `@media (min-width:${breakpoints[start]}${enhancement.unit}) and ` +
-      `(max-width:${breakpoints[keys[endIndex]] - enhancement.step / 100}${
-        enhancement.unit
-      })`
+      `@media (min-width:${breakpoints[start]}px) and ` +
+      `(max-width:${breakpoints[keys[endIndex]] - enhancement.step / 100}px)`
     )
   }
 

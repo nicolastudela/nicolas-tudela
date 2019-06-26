@@ -6,6 +6,8 @@ import { About, Contact, Home, Resume } from './pages'
 // import ReuseComponentsLogic from './containers/ReuseComponentsLogic'
 // import Resume from './components/resume'
 
+const NoMatch = () => <div>NO match</div>
+
 export default () => {
   const [isLoading, setIsLoading] = useState(true)
 
@@ -16,9 +18,10 @@ export default () => {
       <AppBar isLoading={false} />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/about" component={About} />
-        <Route exact path="/contact" component={Contact} />
-        <Route exact path="/resume" component={Resume} />
+        <Route path="/about" component={About} />
+        <Route path="/contact" component={Contact} />
+        <Route path="/resume" component={Resume} />
+        <Route component={NoMatch} />
       </Switch>
       <Footer />
     </>
