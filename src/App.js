@@ -3,9 +3,6 @@ import { Route, Switch } from 'react-router-dom'
 import { AppBar, Footer } from 'components'
 import { About, Contact, Home, Resume } from './pages'
 
-// import ReuseComponentsLogic from './containers/ReuseComponentsLogic'
-// import Resume from './components/resume'
-
 const NoMatch = () => <div>NO match</div>
 
 export default () => {

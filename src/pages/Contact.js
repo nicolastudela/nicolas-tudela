@@ -1,7 +1,4 @@
-import React from 'react'
-
-const Contact = () => {
-  return null
-}
+const Contact = () => 'Comming Soon!'
 
 export default Contact
+

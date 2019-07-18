@@ -117,6 +117,9 @@ const webpackConfig = mode => {
     },
     devServer: {
       contentBase: path.join(__dirname, '/build'),
+      historyApiFallback: {
+        index: 'index.html',
+      },
       port: 3000,
       // publicPath: `${publicPath}`,
       hot: true,

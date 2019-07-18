@@ -1,7 +1,3 @@
-import React from 'react'
+const Resume = () => 'Comming Soon!'
 
-const About = () => {
-  return null
-}
-
-export default About
+export default Resume
