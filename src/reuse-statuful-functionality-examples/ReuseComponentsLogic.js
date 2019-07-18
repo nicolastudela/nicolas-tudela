@@ -7,7 +7,7 @@ import {
   ElementWithRectRenderProp,
   useElementWithRectHook,
   withElementRectHOC,
-} from '../components'
+} from './withElementRect'
 
 const onResize = rect => {
   console.log(`onResize ${rect}`)

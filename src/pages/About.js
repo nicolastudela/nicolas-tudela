@@ -1,9 +1,3 @@
-import React from 'react'
-
-const About = () => {
-  return (
-    <span>Comming Soon!</span>
-  )
-}
+const About = () => 'Comming Soon!'
 
 export default About
