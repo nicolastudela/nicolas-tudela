@@ -11,6 +11,9 @@
     "start": "webpack-dev-server --open --mode development",
     "now-dev": "webpack-dev-server --open --mode development"
   },
+  "engines": {
+    "node": "10.x"
+  },
   "keywords": [],
   "author": "Nicolas Jose Tudela",
   "license": "ISC",
