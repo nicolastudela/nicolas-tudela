@@ -37,7 +37,7 @@ const AppBar = props => {
   return (
     <header>
       <Box
-        height={scrolled ? '70px' : '120px'}
+        py="0.3em"
         boxShadow={scrolled ? '2px 2px 2px rgba(0,153,204,.9)' : 'none'}
         backgroundColor="darkBlue"
         px="l"

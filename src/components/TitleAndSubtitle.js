@@ -28,10 +28,9 @@ const TitleAndSubtitle = ({ subtitle, title, color }) => {
   return (
     <>
       <Typography
-        variant="h6"
+        variant="h4"
         textAlign="center"
         color={colors.subtitle}
-        fontSize={{ sm: '3vw', lg: '2vw' }}
         fontFamily="'EB Garamond', serif"
         fontWeight="500"
         css={{ fontStyle: 'italic' }}
@@ -43,7 +42,6 @@ const TitleAndSubtitle = ({ subtitle, title, color }) => {
         textAlign="center"
         color={colors.title}
         fontWeight="bolder"
-        fontSize={{ sm: '4.5vw', lg: '5vw' }}
       >
         {title}
       </Typography>
