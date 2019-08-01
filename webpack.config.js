@@ -65,7 +65,7 @@ const webpackConfig = mode => {
       },
       extensions: ['*', '.js', '.jsx'],
     },
-    devtool: isDev ? 'inline-source-map' : 'source-map',
+    devtool: isDev ? 'inline-source-map' : 'none',
     optimization: {
       // namedModules: true,
       // [for-debug] Tells webpack to use readable module identifiers for better debugging
@@ -123,7 +123,6 @@ const webpackConfig = mode => {
       port: 3000,
       // publicPath: `${publicPath}`,
       hot: true,
-      historyApiFallback: true,
     },
     plugins,
   }
