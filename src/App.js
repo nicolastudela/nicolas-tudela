@@ -13,13 +13,15 @@ export default () => {
   return (
     <>
       <AppBar isLoading={false} />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/about" component={About} />
-        <Route path="/contact" component={Contact} />
-        <Route path="/resume" component={Resume} />
-        <Route component={NoMatch} />
-      </Switch>
+      <div>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/resume" component={Resume} />
+          <Route component={NoMatch} />
+        </Switch>
+      </div>
       <Footer />
     </>
   )

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import Drawer from '@material-ui/core/Drawer'
 import { Box, Button, Typography } from '@smooth-ui/core-em'
 import PropTypes from 'prop-types'
@@ -23,7 +23,7 @@ const CustomNavLink = ({ onmouseLeave, name, selected, ...rest }) => {
       activeStyle={{ textDecoration: 'underline' }}
       pl="m"
       {...rest}
-      fontSize="1.5vw"
+      //fontSize="1.5em"
       onMouseEnter={() => onmouseLeave(name)}
       onMouseLeave={() => onmouseLeave(null)}
       exact
@@ -50,7 +50,7 @@ const CustomNavButton = ({ name, label, onClick, ...rest }) => {
       color="white"
       variant="secondary"
       {...rest}
-      fontSize="3rem"
+      fontSize="1.5em"
       fontFamily="'Lobster',cursive"
       textAlign="center"
       width={1}
@@ -62,17 +62,23 @@ const CustomNavButton = ({ name, label, onClick, ...rest }) => {
   )
 }
 
+CustomNavButton.propTypes = {
+  label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+}
+
 const navLinks = [
   {
     name: 'home',
     link: '/',
     label: 'Home',
   },
-  {
-    name: 'about',
-    link: '/about',
-    label: 'About',
-  },
+  // {
+  //   name: 'about',
+  //   link: '/about',
+  //   label: 'About',
+  // },
   {
     name: 'resume',
     link: '/resume',
@@ -83,11 +89,11 @@ const navLinks = [
     link: '/contact',
     label: 'Contact',
   },
-  {
-    name: 'blog',
-    link: '/blog',
-    label: 'blog',
-  },
+  // {
+  //   name: 'blog',
+  //   link: '/blog',
+  //   label: 'blog',
+  // },
 ]
 
 const AppBarNavigation = () => {

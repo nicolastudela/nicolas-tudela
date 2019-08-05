@@ -27,23 +27,23 @@ const TitleAndSubtitle = ({ subtitle, title, color }) => {
   const colors = textColorsByBackgroundColors(color)
   return (
     <>
-      <Typography
-        variant="h6"
-        textAlign="center"
-        color={colors.subtitle}
-        fontSize={{ sm: '3vw', lg: '2vw' }}
-        fontFamily="'EB Garamond', serif"
-        fontWeight="500"
-        css={{ fontStyle: 'italic' }}
-      >
-        {subtitle}
-      </Typography>
+      {subtitle && (
+        <Typography
+          variant="h4"
+          textAlign="center"
+          color={colors.subtitle}
+          fontFamily="'EB Garamond', serif"
+          fontWeight="500"
+          css={{ fontStyle: 'italic' }}
+        >
+          {subtitle}
+        </Typography>
+      )}
       <Typography
         variant="h1"
         textAlign="center"
         color={colors.title}
         fontWeight="bolder"
-        fontSize={{ sm: '4.5vw', lg: '5vw' }}
       >
         {title}
       </Typography>
@@ -58,7 +58,7 @@ TitleAndSubtitle.propTypes = {
 }
 
 TitleAndSubtitle.defaultProps = {
-  subtitle: '',
+  subtitle: null,
   title: '',
   color: null,
 }
