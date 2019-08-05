@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import Drawer from '@material-ui/core/Drawer'
 import { Box, Button, Typography } from '@smooth-ui/core-em'
 import PropTypes from 'prop-types'
@@ -23,7 +23,7 @@ const CustomNavLink = ({ onmouseLeave, name, selected, ...rest }) => {
       activeStyle={{ textDecoration: 'underline' }}
       pl="m"
       {...rest}
-      fontSize="1.5em"
+      //fontSize="1.5em"
       onMouseEnter={() => onmouseLeave(name)}
       onMouseLeave={() => onmouseLeave(null)}
       exact

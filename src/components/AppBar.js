@@ -37,10 +37,10 @@ const AppBar = props => {
   return (
     <header>
       <Box
-        py="0.3em"
+        py="xs"
         boxShadow={scrolled ? '2px 2px 2px rgba(0,153,204,.9)' : 'none'}
         backgroundColor="darkBlue"
-        px="l"
+        px="m"
         display="flex"
         alignItems="center"
         position={scrolled ? 'fixed' : 'relative'}
@@ -59,7 +59,7 @@ const AppBar = props => {
           </Box>
           <Box display="flex" flexDirection="column" alignItems="center">
             <Typography
-              variant="h1"
+              variant="h2"
               color="white"
               fontFamily="'Lobster',cursive"
               css={titleStyle}
@@ -74,7 +74,7 @@ const AppBar = props => {
                   fontFamily="'Lobster',cursive"
                   css={titleStyle}
                 >
-                  Software Engineer &#183; Remote Contractor &#183; Easy-Going
+                  Remote Software Engineer &#183; Good vibes
                 </Typography>
               </Breakpoint>
             )}

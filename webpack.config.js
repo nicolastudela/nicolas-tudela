@@ -61,6 +61,7 @@ const webpackConfig = mode => {
         pages: path.join(__dirname, 'src/pages'),
         images: path.join(__dirname, 'src/images'),
         icons: path.join(__dirname, 'src/icons'),
+        uiCommons: path.join(__dirname, 'src/uiCommons'),
         'react-dom': '@hot-loader/react-dom',
       },
       extensions: ['*', '.js', '.jsx'],
@@ -117,9 +118,7 @@ const webpackConfig = mode => {
     },
     devServer: {
       contentBase: path.join(__dirname, '/build'),
-      historyApiFallback: {
-        index: 'index.html',
-      },
+      historyApiFallback: true,
       port: 3000,
       // publicPath: `${publicPath}`,
       hot: true,

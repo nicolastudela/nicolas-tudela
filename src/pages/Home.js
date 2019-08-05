@@ -10,6 +10,7 @@ const imgStyle = {
   height: '250px',
 }
 
+// eslint-disable-next-line react/prop-types
 const Card = ({ isMobile, title, text, imgSrc, imgAlt, ...rest }) => {
   return (
     <Box

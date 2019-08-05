@@ -6,6 +6,7 @@ import { Normalize, ThemeProvider } from '@smooth-ui/core-em'
 import { Router } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
 import ClientDeviceTypeProvider from 'components/utils/useClientDeviceType'
+import ScrollToTop from 'components/utils/ScrollToTop'
 import App from './App'
 
 import theme from './theme'
@@ -17,9 +18,11 @@ const Main = hot(() => (
     <ThemeProvider theme={theme}>
       <Normalize />
       <Router history={appHistory}>
-        <ClientDeviceTypeProvider>
-          <App />
-        </ClientDeviceTypeProvider>
+        <ScrollToTop>
+          <ClientDeviceTypeProvider>
+            <App />
+          </ClientDeviceTypeProvider>
+        </ScrollToTop>
       </Router>
     </ThemeProvider>
   </>
