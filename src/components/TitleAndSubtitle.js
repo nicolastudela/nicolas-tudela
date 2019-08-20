@@ -23,7 +23,7 @@ const textColorsByBackgroundColors = color => {
   return customColors
 }
 
-const TitleAndSubtitle = ({ subtitle, title, color }) => {
+const TitleAndSubtitle = ({ subtitle, title, color, ...rest }) => {
   const colors = textColorsByBackgroundColors(color)
   return (
     <>
@@ -44,6 +44,7 @@ const TitleAndSubtitle = ({ subtitle, title, color }) => {
         textAlign="center"
         color={colors.title}
         fontWeight="bolder"
+        {...rest}
       >
         {title}
       </Typography>

@@ -9,7 +9,6 @@ const webpackConfig = mode => {
   const isProd = mode === 'production'
 
   const outputPath = path.resolve(__dirname, 'build')
-  // const publicPath = isDev ? '/' : '/'
 
   let plugins = [
     new HtmlWebpackPlugin({
@@ -62,6 +61,7 @@ const webpackConfig = mode => {
         images: path.join(__dirname, 'src/images'),
         icons: path.join(__dirname, 'src/icons'),
         uiCommons: path.join(__dirname, 'src/uiCommons'),
+        constants: path.join(__dirname, 'src/constants'),
         'react-dom': '@hot-loader/react-dom',
       },
       extensions: ['*', '.js', '.jsx'],

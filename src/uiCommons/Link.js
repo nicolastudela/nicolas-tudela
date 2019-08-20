@@ -16,6 +16,7 @@ const styles = underline => ({
     backgroundColor: 'transparent',
   },
   fontFamily: "'Lobster',cursive",
+  backgroundColor: 'transparent',
 })
 
 const Link = ({

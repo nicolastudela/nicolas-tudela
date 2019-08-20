@@ -44,6 +44,7 @@ const AppBar = props => {
         display="flex"
         alignItems="center"
         position={scrolled ? 'fixed' : 'relative'}
+        top="0"
         justifyContent="space-between"
         width="100%"
         zIndex="1000"
