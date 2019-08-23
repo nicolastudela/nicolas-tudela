@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from 'react'
 import { Button } from '@smooth-ui/core-em'
 import { Link as RouterLink } from 'react-router-dom'

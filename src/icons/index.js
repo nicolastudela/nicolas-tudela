@@ -1,0 +1,6 @@
+export { default as java } from './java.png'
+export { default as php } from './php.png'
+export { default as rails } from './rails.png'
+export { default as scala } from './scala.png'
+export { default as javascript } from './javascript.png'
+export { default as football } from './football.svg'

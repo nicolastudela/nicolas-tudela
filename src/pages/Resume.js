@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
 import { useQuery } from '@apollo/react-hooks'
-import { TitleAndSubtitle, ContentPanel, SkillsPanel } from 'components'
+import {
+  TitleAndSubtitle,
+  ContentPanel,
+  SkillsPanel,
+  WorkExperiencesPanel,
+} from 'components'
 import { PROGRAMMING_SCOPES } from 'constants'
-import { Box, Typography } from '@smooth-ui/core-em'
+import { Box } from '@smooth-ui/core-em'
 import road from 'images/road.jpg'
 import { Link } from 'uiCommons'
 import { GET_RESUME } from '../graphql/Resume'
@@ -40,6 +45,13 @@ const Resume = () => {
       </ContentPanel>
       <SkillsPanel
         skills={data.resume ? data.resume.skills : []}
+        loading={loading}
+        selectedScope={selectedScope}
+        onScopeSelection={setSelectedScope}
+        error={error}
+      />
+      <WorkExperiencesPanel
+        experiences={data.resume ? data.resume.workExperiences : []}
         loading={loading}
         selectedScope={selectedScope}
         onScopeSelection={setSelectedScope}
