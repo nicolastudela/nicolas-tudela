@@ -1,6 +1,7 @@
 import React from 'react'
 import { Box, Typography } from '@smooth-ui/core-em'
 import { TitleAndSubtitle, ContentPanel } from 'components'
+import { Text } from 'uiCommons'
 import workingNico from 'images/working-nico-lg.jpg'
 import { fullstack, javascript, over10years, backgrKeyword } from 'images'
 import { useClientDeviceType } from 'components/utils/useClientDeviceType'
@@ -23,12 +24,12 @@ const Card = ({ isMobile, title, text, imgSrc, imgAlt, ...rest }) => {
         <img alt={imgAlt} src={imgSrc} style={imgStyle} />
       </Box>
       <Box>
-        <Typography variant="h4" textAlign="center" mt="5px">
+        <Text variant="h4" size="l" bold textAlign="center" mt="5px">
           {title}
-        </Typography>
-        <Typography as="p" fontSize="0.8em" textAlign="center" ml="5px">
+        </Text>
+        <Text as="p" size="s" textAlign="center" ml="5px">
           {text}
-        </Typography>
+        </Text>
       </Box>
     </Box>
   )
@@ -110,15 +111,10 @@ const Home = () => {
       </ContentPanel>
       <ContentPanel color="gray" backgroundPosition="center">
         <>
-          <Typography
-            variant="h1"
-            fontFamily="'Lobster',cursive"
-            textAlign="center"
-            color="lightBlue"
-          >
+          <Text variant="h1" size="title" textAlign="center" color="lightBlue">
             {'Keys to success when working remotely'}
-          </Typography>
-          <Typography as="p">
+          </Text>
+          <Text as="p">
             The keys to creating meaningful and lasting relationships are
             transparency, authenticity and openness. Expectations must be set,
             shared and clarified.
@@ -132,7 +128,7 @@ const Home = () => {
             trust. That is why we have to be as transparent and clear as
             possible. Ongoing communication and having personal or off-topic
             chats can help too.
-          </Typography>
+          </Text>
         </>
       </ContentPanel>
       <ContentPanel color="white">

@@ -10,3 +10,11 @@ export const PROGRAMMING_SCOPES = {
   FRONT_END: 'FRONT_END',
   FULL_STACK: 'FULL_STACK',
 }
+
+export const PROGRAMMING_LANGUAGES = {
+  JAVASCRIPT: 'Javascript',
+  JAVA: 'Java',
+  SCALA: 'Scala',
+  RUBY_ON_RAILS: 'Ruby on Rails',
+  PHP: 'Php',
+}

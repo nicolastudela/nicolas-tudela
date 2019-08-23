@@ -2,10 +2,10 @@ import React from 'react'
 import { CircularProgress } from '@material-ui/core'
 import { ApolloError } from 'apollo-boost'
 import PropTypes from 'prop-types'
-import { Box, Typography } from '@smooth-ui/core-em'
+import { Box } from '@smooth-ui/core-em'
 import { SKILL_LEVELS, PROGRAMMING_SCOPES } from 'constants'
 import { useClientDeviceType } from 'components/utils/useClientDeviceType'
-import { Select } from 'uiCommons'
+import { Select, Text } from 'uiCommons'
 
 const prioritySortFunc = (a, b) => {
   const aPrio = a.priority ? a.priority : 0
@@ -67,9 +67,9 @@ const SkillsPanel = ({
         pl={{ sm: 0, lg: 'xxl' }}
         width={{ sm: 1, lg: 1 / 3 }}
       >
-        <Typography fontFamily={"'Lobster',cursive"} variant="h4">
+        <Text cursive size="subtitle" variant="h4">
           Technologies
-        </Typography>
+        </Text>
         <Select
           inputId="skills-scope"
           name="scope"
@@ -88,44 +88,36 @@ const SkillsPanel = ({
         </Select>
       </Box>
       <Box width={{ sm: 1, lg: 1 / 3 }}>
-        <Typography
-          fontFamily={"'Lobster',cursive"}
-          variant="h4"
-          display="block"
-        >
+        <Text cursive size="xl" variant="h4" display="block">
           Day-to-Day Confort
-        </Typography>
+        </Text>
         {loading && <CircularProgress style={{ margin: '40px' }} />}
         {error && <p>Error :(</p>}
         {!loading && !error && (
           <ul>
             {dayToDay.map(({ name }, idx) => (
               <li key={name}>
-                <Typography fontSize={idx > 9 ? '0.6em' : '0.8em'} key={name}>
+                <Text size={idx > 9 ? 'xs' : 's'} key={name}>
                   {name}
-                </Typography>
+                </Text>
               </li>
             ))}
           </ul>
         )}
       </Box>
       <Box width={{ sm: 1, lg: 1 / 3 }}>
-        <Typography
-          fontFamily={"'Lobster',cursive"}
-          variant="h4"
-          display="block"
-        >
+        <Text cursive variant="h4" size="xl" display="block">
           Experience With
-        </Typography>
+        </Text>
         {loading && <CircularProgress style={{ margin: '40px' }} />}
         {error && <p>Error :(</p>}
         {!loading && !error && (
           <ul>
             {experienceWith.map(({ name }, idx) => (
               <li>
-                <Typography fontSize={idx > 9 ? '0.6em' : '0.8em'} key={name}>
+                <Text size={idx > 9 ? 'xs' : 's'} key={name}>
                   {name}
-                </Typography>
+                </Text>
               </li>
             ))}
           </ul>
@@ -141,7 +133,7 @@ SkillsPanel.propTypes = {
   onScopeSelection: PropTypes.func,
   loading: PropTypes.bool,
   error: PropTypes.objectOf(ApolloError),
-  selectedScope: PropTypes.objectOf(Object),
+  selectedScope: PropTypes.string,
 }
 
 SkillsPanel.defaultProps = {

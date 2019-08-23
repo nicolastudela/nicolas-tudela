@@ -96,7 +96,7 @@ CustomSelect.propTypes = {
   label: PropTypes.string.isRequired,
   options: PropTypes.arrayOf(String).isRequired,
   value: PropTypes.string.isRequired,
-  onChange: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
   size: PropTypes.string,
   fontVariant: PropTypes.string,
   variant: PropTypes.string,
