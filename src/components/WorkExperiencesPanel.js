@@ -1,6 +1,6 @@
 import React from 'react'
 import { CircularProgress, Tooltip, Popover } from '@material-ui/core'
-import { ApolloError } from 'apollo-boost'
+import { ApolloError } from 'apollo-client'
 import PropTypes from 'prop-types'
 import { Box, Button } from '@smooth-ui/core-em'
 import { PROGRAMMING_SCOPES, PROGRAMMING_LANGUAGES } from 'constants'
@@ -37,6 +37,7 @@ const programmingLanguageIcons = [
       title={value}
       aria-label={value}
       style={{ height: '35px', width: '35px' }}
+      key={key}
     >
       <img src={srcImg} alt={value} />
     </Tooltip>
@@ -210,7 +211,7 @@ const WorkExperiencesPanel = ({
                           <Text cursive>Highlights</Text>
                           <ul>
                             {highlights.map(light => (
-                              <Text as="li" size="xs">
+                              <Text as="li" size="xs" key={light}>
                                 {light}
                               </Text>
                             ))}
@@ -222,7 +223,7 @@ const WorkExperiencesPanel = ({
                           <Text cursive>Technologies</Text>
                           <ul>
                             {technologies.map(technology => (
-                              <Text as="li" size="xs">
+                              <Text as="li" size="xs" key={technology}>
                                 {technology}
                               </Text>
                             ))}

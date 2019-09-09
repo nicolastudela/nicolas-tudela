@@ -56,7 +56,11 @@ const Link = ({
 }
 
 Link.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.string,
+  ]),
   to: PropTypes.string,
   href: PropTypes.string,
   ariaLabel: PropTypes.string,
@@ -67,6 +71,7 @@ Link.propTypes = {
 }
 
 Link.defaultProps = {
+  children: null,
   to: null,
   onClick: null,
   href: null,

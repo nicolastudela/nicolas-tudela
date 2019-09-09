@@ -1,4 +1,4 @@
-import { gql } from 'apollo-boost'
+import gql from 'graphql-tag'
 
 const fragments = {
   workExperience: gql`
@@ -27,8 +27,7 @@ const fragments = {
   `,
 }
 
-// eslint-disable-next-line import/prefer-default-export
-export const GET_RESUME = gql`
+const GET_RESUME = gql`
   query Resume {
     resume {
       summary
@@ -53,3 +52,5 @@ export const GET_RESUME = gql`
   ${fragments.workExperience}
   ${fragments.skill}
 `
+
+export default GET_RESUME

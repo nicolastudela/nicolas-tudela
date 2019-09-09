@@ -7,6 +7,7 @@ import { Router } from 'react-router-dom'
 import { ApolloProvider } from '@apollo/react-hooks'
 import { createBrowserHistory } from 'history'
 import ClientDeviceTypeProvider from 'components/utils/useClientDeviceType'
+import LoggedUserProvider from 'components/utils/useLoggedUser'
 import ScrollToTop from 'components/utils/ScrollToTop'
 import App from './App'
 import apolloClient from './api'
@@ -22,7 +23,9 @@ const Main = hot(() => (
         <ScrollToTop>
           <ClientDeviceTypeProvider>
             <ApolloProvider client={apolloClient}>
-              <App />
+              <LoggedUserProvider>
+                <App />
+              </LoggedUserProvider>
             </ApolloProvider>
           </ClientDeviceTypeProvider>
         </ScrollToTop>

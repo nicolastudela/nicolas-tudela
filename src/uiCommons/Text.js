@@ -1,7 +1,8 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Typography } from '@smooth-ui/core-em'
 
-const Text = ({ bold, size, cursive, children, ...rest }) => {
+const Text = ({ truncate, bold, size, cursive, children, ...rest }) => {
   let custom = {}
 
   let fontSize
@@ -30,11 +31,39 @@ const Text = ({ bold, size, cursive, children, ...rest }) => {
     custom = { ...custom, fontWeight: 'bold' }
   }
 
+  let style
+  if (truncate === 'ellipsis') {
+    style = {
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+    }
+  }
+
   return (
-    <Typography {...custom} {...rest}>
+    <Typography {...custom} {...rest} style={style}>
       {children}
     </Typography>
   )
+}
+
+Text.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
+  truncate: PropTypes.string,
+  bold: PropTypes.bool,
+  size: PropTypes.string,
+  cursive: PropTypes.bool,
+}
+
+Text.defaultProps = {
+  children: null,
+  truncate: null,
+  bold: false,
+  size: null,
+  cursive: false,
 }
 
 export default Text

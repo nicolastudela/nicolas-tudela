@@ -1,8 +1,14 @@
 {
-  "plugins": ["react-hot-loader/babel", "@babel/plugin-proposal-class-properties", "@babel/plugin-proposal-object-rest-spread", "emotion"],
+  "plugins": ["react-hot-loader/babel", "@babel/plugin-proposal-class-properties", "@babel/plugin-proposal-object-rest-spread", "@babel/plugin-transform-runtime", "emotion"],
   "presets": [
-    "@babel/env",
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "entry",
+        "corejs": 3
+      }
+    ],
     "@babel/react",
     "@emotion/babel-preset-css-prop"
-  ]
+  ],
 }

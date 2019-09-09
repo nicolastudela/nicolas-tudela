@@ -18,3 +18,8 @@ export const PROGRAMMING_LANGUAGES = {
   RUBY_ON_RAILS: 'Ruby on Rails',
   PHP: 'Php',
 }
+
+export const USER_ROLES = {
+  USER: 'USER',
+  ADMIN: 'ADMIN',
+}
