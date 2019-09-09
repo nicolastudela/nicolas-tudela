@@ -10,7 +10,7 @@ import { PROGRAMMING_SCOPES } from 'constants'
 import { Box } from '@smooth-ui/core-em'
 import road from 'images/road.jpg'
 import { Link } from 'uiCommons'
-import { GET_RESUME } from '../graphql/Resume'
+import { GET_RESUME } from 'graphqlSchema'
 import resumePdf from '../static/nicolas-tudela-cv.pdf'
 
 const Resume = () => {

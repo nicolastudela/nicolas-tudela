@@ -22,7 +22,7 @@ const labelStyle = (size, variant, fontVariant) => {
   }
 }
 
-const inputStyle = (size, variant) => {
+const inputStyle = size => {
   let fontSize
   if (size === 'm') fontSize = '1em !important'
   else if (size === 's') fontSize = '0.8em !important'
@@ -94,7 +94,6 @@ CustomSelect.propTypes = {
   inputId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  options: PropTypes.arrayOf(String).isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   size: PropTypes.string,

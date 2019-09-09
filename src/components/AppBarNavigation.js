@@ -1,74 +1,19 @@
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
-import Drawer from '@material-ui/core/Drawer'
-import { Box, Button, Typography } from '@smooth-ui/core-em'
-import PropTypes from 'prop-types'
+// import { useQuery, useApolloClient } from '@apollo/react-hooks'
+
+import { IconButton, Drawer, CircularProgress } from '@material-ui/core'
+import InputIcon from '@material-ui/icons/Input'
+import { Box } from '@smooth-ui/core-em'
+import { Modal } from 'uiCommons'
 import { useClientDeviceType } from 'components/utils/useClientDeviceType'
+import { useLoggedUser } from 'components/utils/useLoggedUser'
 import sandwichIcon from 'icons/baseline-reorder-24px.svg'
+import SigninPanel from './SigninPanel'
+import MobileBarNavButton from './MobileBarNavButton'
+import BarNavLink from './BarNavLink'
+import UserMenu from './UserMenu'
 
-const CustomNavLink = ({ onmouseLeave, name, selected, ...rest }) => {
-  const custom = {
-    textDecoration: 'none',
-  }
-
-  const CustomLink = Typography.withComponent(NavLink)
-
-  return (
-    <CustomLink
-      key={name}
-      css={custom}
-      fontFamily="'Lobster',cursive"
-      color="white"
-      opacity={selected === name || selected === null ? '1' : '0.5'}
-      activeStyle={{ textDecoration: 'underline' }}
-      pl="m"
-      {...rest}
-      //fontSize="1.5em"
-      onMouseEnter={() => onmouseLeave(name)}
-      onMouseLeave={() => onmouseLeave(null)}
-      exact
-    />
-  )
-}
-
-CustomNavLink.propTypes = {
-  onmouseLeave: PropTypes.func.isRequired,
-  name: PropTypes.string.isRequired,
-  selected: PropTypes.string,
-}
-
-CustomNavLink.defaultProps = {
-  selected: null,
-}
-
-const CustomNavButton = ({ name, label, onClick, ...rest }) => {
-  const CustomButton = Button.withComponent(NavLink)
-
-  return (
-    <CustomButton
-      activeStyle={{ color: 'lightBlue' }}
-      color="white"
-      variant="secondary"
-      {...rest}
-      fontSize="1.5em"
-      fontFamily="'Lobster',cursive"
-      textAlign="center"
-      width={1}
-      exact
-      onClick={onClick}
-    >
-      {label}
-    </CustomButton>
-  )
-}
-
-CustomNavButton.propTypes = {
-  label: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
-}
-
-const navLinks = [
+const staticNavLinks = [
   {
     name: 'home',
     link: '/',
@@ -99,6 +44,8 @@ const navLinks = [
 const AppBarNavigation = () => {
   const [selectedLink, setSelectedLink] = useState(null)
   const [openDrawer, setOpenDrawer] = useState(false)
+  const [signInModalVisible, setSignInModalVisible] = useState(false)
+  const { loggedUser, loading: userLoading, onSignOut } = useLoggedUser()
   const { isMobile } = useClientDeviceType()
 
   const toggleDrawer = open => event => {
@@ -112,37 +59,87 @@ const AppBarNavigation = () => {
     setOpenDrawer(open)
   }
 
-  return !isMobile ? (
-    <Box>
-      {navLinks.map(({ name, link, label }) => (
-        <CustomNavLink
-          key={name}
-          name={name}
-          selected={selectedLink}
-          onmouseLeave={setSelectedLink}
-          to={link}
-        >
-          {label}
-        </CustomNavLink>
-      ))}
-    </Box>
-  ) : (
+  const onCloseModal = () => {
+    setSignInModalVisible(false)
+  }
+
+  return (
     <>
-      <Drawer anchor="top" open={openDrawer} onClose={toggleDrawer(false)}>
-        {navLinks.map(({ name, link, label }) => (
-          <CustomNavButton
-            key={name}
-            name={name}
-            selected={selectedLink}
-            to={link}
-            label={label}
-            onClick={toggleDrawer(false)}
-          />
-        ))}
-      </Drawer>
-      <Box onClick={toggleDrawer(true)}>
-        <img width="70px" src={sandwichIcon} alt="sandwichico" />
-      </Box>
+      <Modal
+        title="Sign In"
+        withCloseButton
+        open={signInModalVisible}
+        onClose={onCloseModal}
+      >
+        <SigninPanel onClose={onCloseModal} />
+      </Modal>
+      {!isMobile ? (
+        <Box display="flex" alignItems="center">
+          {staticNavLinks.map(({ name, link, label }) => (
+            <BarNavLink
+              key={name}
+              name={name}
+              selected={selectedLink}
+              onmouseLeave={setSelectedLink}
+              to={link}
+            >
+              {label}
+            </BarNavLink>
+          ))}
+          {userLoading && <CircularProgress />}
+          {!userLoading && !loggedUser && (
+            <IconButton
+              aria-label="sign-in"
+              onClick={() => setSignInModalVisible(true)}
+              onMouseEnter={() => setSelectedLink('signin')}
+              onMouseLeave={() => setSelectedLink(null)}
+            >
+              <InputIcon style={{ color: 'white' }} />
+            </IconButton>
+          )}
+          {!userLoading && loggedUser && (
+            <UserMenu
+              isMobile={isMobile}
+              onSignOut={onSignOut}
+              loggedUser={loggedUser}
+            />
+          )}
+        </Box>
+      ) : (
+        <>
+          <Drawer anchor="top" open={openDrawer} onClose={toggleDrawer(false)}>
+            {staticNavLinks.map(({ name, link, label }) => (
+              <MobileBarNavButton
+                key={name}
+                name={name}
+                selected={selectedLink}
+                to={link}
+                label={label}
+                onClick={toggleDrawer(false)}
+              />
+            ))}
+            {!loggedUser ? (
+              <MobileBarNavButton
+                label="Sign In"
+                name="signin"
+                onClick={event => {
+                  toggleDrawer(false)(event)
+                  setSignInModalVisible(true)
+                }}
+              />
+            ) : (
+              <UserMenu
+                isMobile={isMobile}
+                onSignOut={onSignOut}
+                loggedUser={loggedUser}
+              />
+            )}
+          </Drawer>
+          <Box onClick={toggleDrawer(true)}>
+            <img width="70px" src={sandwichIcon} alt="sandwichico" />
+          </Box>
+        </>
+      )}
     </>
   )
 }

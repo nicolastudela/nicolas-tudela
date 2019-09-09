@@ -1,6 +1,6 @@
 import React from 'react'
 import { CircularProgress } from '@material-ui/core'
-import { ApolloError } from 'apollo-boost'
+import { ApolloError } from 'apollo-client'
 import PropTypes from 'prop-types'
 import { Box } from '@smooth-ui/core-em'
 import { SKILL_LEVELS, PROGRAMMING_SCOPES } from 'constants'
@@ -114,7 +114,7 @@ const SkillsPanel = ({
         {!loading && !error && (
           <ul>
             {experienceWith.map(({ name }, idx) => (
-              <li>
+              <li key={name}>
                 <Text size={idx > 9 ? 'xs' : 's'} key={name}>
                   {name}
                 </Text>
