@@ -64,6 +64,7 @@ const webpackConfig = mode => {
         constants: path.join(__dirname, 'src/constants'),
         graphqlSchema: path.join(__dirname, 'src/graphqlSchema'),
         'react-dom': '@hot-loader/react-dom',
+        utils: path.join(__dirname, 'src/utils'),
       },
       extensions: ['*', '.js', '.jsx'],
     },

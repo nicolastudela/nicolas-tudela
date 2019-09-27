@@ -46,6 +46,7 @@ const CustomSelect = ({
   error,
   required,
   disabled,
+  native,
   ...rest
 }) => {
   return (
@@ -64,7 +65,7 @@ const CustomSelect = ({
           {label}
         </InputLabel>
         <Select
-          native
+          native={native}
           value={value}
           onChange={onChange}
           input={
@@ -106,6 +107,7 @@ CustomSelect.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
+  native: PropTypes.bool,
 }
 
 CustomSelect.defaultProps = {
@@ -116,6 +118,7 @@ CustomSelect.defaultProps = {
   error: false,
   disabled: false,
   required: false,
+  native: true,
 }
 
 export default CustomSelect

@@ -5,6 +5,7 @@ const fragments = {
     fragment User on User {
       email
       role
+      isAdmin
     }
   `,
   personalData: gql`

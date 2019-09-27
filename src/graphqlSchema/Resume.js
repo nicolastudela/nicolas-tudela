@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 const fragments = {
   workExperience: gql`
     fragment WorkExperience on WorkExperience {
+      _id
       company
       companyWebsite
       position
@@ -19,15 +20,17 @@ const fragments = {
   `,
   skill: gql`
     fragment Skill on Skill {
+      _id
       name
       level
       keywords
       scope
+      priority
     }
   `,
 }
 
-const GET_RESUME = gql`
+export const GET_RESUME = gql`
   query Resume {
     resume {
       summary
@@ -53,4 +56,35 @@ const GET_RESUME = gql`
   ${fragments.skill}
 `
 
-export default GET_RESUME
+export const CREATE_SKILL_MUTATION = {
+  operationName: `createSkill`,
+  gql: gql`
+    mutation createSkill($skill: SkillInput) {
+      createSkill(skill: $skill) {
+        ...Skill
+      }
+    }
+    ${fragments.skill}
+  `,
+}
+
+export const REMOVE_SKILL_MUTATION = {
+  operationName: `removeSkill`,
+  gql: gql`
+    mutation removeSkill($id: ID!) {
+      removeSkill(id: $id)
+    }
+  `,
+}
+
+export const UPDATE_SKILL_MUTATION = {
+  operationName: `updateSkill`,
+  gql: gql`
+    mutation updateSkill($id: ID!, $skill: SkillInput) {
+      updateSkill(id: $id, skill: $skill) {
+        ...Skill
+      }
+    }
+    ${fragments.skill}
+  `,
+}
