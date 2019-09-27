@@ -1,7 +1,10 @@
 import React from 'react'
-import { CircularProgress } from '@material-ui/core'
+import { CircularProgress, IconButton } from '@material-ui/core'
 import { ApolloError } from 'apollo-client'
 import PropTypes from 'prop-types'
+import EditIcon from '@material-ui/icons/Edit'
+import AddIcon from '@material-ui/icons/Add'
+import RemoveIcon from '@material-ui/icons/Delete'
 import { Box } from '@smooth-ui/core-em'
 import { SKILL_LEVELS, PROGRAMMING_SCOPES } from 'constants'
 import { useClientDeviceType } from 'components/utils/useClientDeviceType'
@@ -11,7 +14,7 @@ const prioritySortFunc = (a, b) => {
   const aPrio = a.priority ? a.priority : 0
   const bPrio = b.priority ? b.priority : 0
 
-  return aPrio - bPrio === 0 ? a.name.localeCompare(b.name) : aPrio - bPrio
+  return bPrio - aPrio === 0 ? a.name.localeCompare(b.name) : bPrio - aPrio
 }
 
 const SkillsPanel = ({
@@ -19,10 +22,16 @@ const SkillsPanel = ({
   selectedScope,
   onScopeSelection,
   loading,
+  user,
   error,
+  onCreate,
+  onRemove,
+  onEdit,
   ...rest
 }) => {
   const { isMobile } = useClientDeviceType()
+
+  const isAdminUser = user && user.isAdmin
 
   const scopedSkills = skills.filter(
     skill =>
@@ -70,6 +79,11 @@ const SkillsPanel = ({
         <Text cursive size="subtitle" variant="h4">
           Technologies
         </Text>
+        {isAdminUser && (
+          <IconButton onClick={onCreate}>
+            <AddIcon style={{ fontSize: 24 }} />
+          </IconButton>
+        )}
         <Select
           inputId="skills-scope"
           name="scope"
@@ -95,11 +109,21 @@ const SkillsPanel = ({
         {error && <p>Error :(</p>}
         {!loading && !error && (
           <ul>
-            {dayToDay.map(({ name }, idx) => (
-              <li key={name}>
-                <Text size={idx > 9 ? 'xs' : 's'} key={name}>
-                  {name}
+            {dayToDay.map((skill, idx) => (
+              <li key={skill._id}>
+                <Text size={idx > 9 ? 'xs' : 's'} key={skill.name}>
+                  {skill.name}
                 </Text>
+                {isAdminUser && (
+                  <IconButton onClick={() => onEdit(skill)}>
+                    <EditIcon style={{ fontSize: 24 }} />
+                  </IconButton>
+                )}
+                {isAdminUser && (
+                  <IconButton onClick={() => onRemove(skill)}>
+                    <RemoveIcon style={{ fontSize: 24 }} />
+                  </IconButton>
+                )}
               </li>
             ))}
           </ul>
@@ -113,11 +137,21 @@ const SkillsPanel = ({
         {error && <p>Error :(</p>}
         {!loading && !error && (
           <ul>
-            {experienceWith.map(({ name }, idx) => (
-              <li key={name}>
-                <Text size={idx > 9 ? 'xs' : 's'} key={name}>
-                  {name}
+            {experienceWith.map((skill, idx) => (
+              <li key={skill._id}>
+                <Text size={idx > 9 ? 'xs' : 's'} key={skill.name}>
+                  {skill.name}
                 </Text>
+                {isAdminUser && (
+                  <IconButton onClick={() => onEdit(skill)}>
+                    <EditIcon style={{ fontSize: 24 }} />
+                  </IconButton>
+                )}
+                {isAdminUser && (
+                  <IconButton onClick={() => onRemove(skill)}>
+                    <RemoveIcon style={{ fontSize: 24 }} />
+                  </IconButton>
+                )}
               </li>
             ))}
           </ul>
@@ -134,6 +168,12 @@ SkillsPanel.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.objectOf(ApolloError),
   selectedScope: PropTypes.string,
+  user: PropTypes.shape({
+    isAdmin: PropTypes.bool.isRequired,
+  }),
+  onCreate: PropTypes.func,
+  onEdit: PropTypes.func,
+  onRemove: PropTypes.func,
 }
 
 SkillsPanel.defaultProps = {
@@ -143,6 +183,10 @@ SkillsPanel.defaultProps = {
   loading: false,
   error: null,
   selectedScope: null,
+  user: null,
+  onCreate: () => {},
+  onEdit: () => {},
+  onRemove: () => {},
 }
 
 export default SkillsPanel

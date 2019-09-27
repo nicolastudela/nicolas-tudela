@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Box, Button } from '@smooth-ui/core-em'
-import { TextField, InputAdornment, CircularProgress } from '@material-ui/core'
+import { InputAdornment, CircularProgress } from '@material-ui/core'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import Lock from '@material-ui/icons/Lock'
 import { useMutation } from '@apollo/react-hooks'
-import { Text, Link } from 'uiCommons'
+import { Text, Link, TextField } from 'uiCommons'
 import { useLoggedUser } from 'components/utils/useLoggedUser'
 import { SIGN_IN } from 'graphqlSchema'
-import { validators } from '../utils'
+import { validateEmail } from 'utils/formCommons'
 
 const SignInPanel = ({ onClose }) => {
   const [state, setState] = useState({
@@ -39,7 +39,7 @@ const SignInPanel = ({ onClose }) => {
     }
 
     if (name === 'email') {
-      if (!validators.validateEmail(value)) {
+      if (!validateEmail(value)) {
         field.error = 'Please input a valid email'
       } else {
         field.error = null
@@ -89,10 +89,8 @@ const SignInPanel = ({ onClose }) => {
               </InputAdornment>
             ),
           }}
-          fullWidth
           type="email"
           variant="outlined"
-          margin="normal"
         />
         <TextField
           // className={classes.margin}
@@ -109,11 +107,9 @@ const SignInPanel = ({ onClose }) => {
               </InputAdornment>
             ),
           }}
-          fullWidth
           type="password"
           autoComplete="current-password"
           variant="outlined"
-          margin="normal"
           name="password"
         />
         <Box my="xl" display="flex" flexDirection="column" alignItems="center">

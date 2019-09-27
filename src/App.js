@@ -17,7 +17,7 @@ const PrivateRoute = ({ component: Component, adminOnly, ...rest }) => {
       render={props => {
         if (loading) return <CircularProgress />
 
-        if (loggedUser && (!adminOnly || loggedUser.role === 'ADMIN')) {
+        if (loggedUser && (!adminOnly || loggedUser.isAdmin)) {
           return <Component loggedUser={loggedUser} {...props} />
         }
         return (

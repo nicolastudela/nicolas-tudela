@@ -10,7 +10,7 @@ const LoggedUserProvider = ({ children }) => {
   const apolloClient = useApolloClient()
   const [getMe, { data, loading, called: meQueryCalled }] = useLazyQuery(ME)
 
-  if (localStorage.getItem('token') && !meQueryCalled) {
+  if (localStorage.getItem('token') && !meQueryCalled && !isLogged) {
     setIsLogged(true)
     getMe()
   }

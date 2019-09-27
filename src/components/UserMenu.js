@@ -4,11 +4,10 @@ import { Box } from '@smooth-ui/core-em'
 import { Menu, MenuItem, IconButton, Avatar } from '@material-ui/core'
 import { defaultProfileImage } from 'icons'
 import { Text, Link } from 'uiCommons'
-import { USER_ROLES } from 'constants'
 import MobileBarNavButton from './MobileBarNavButton'
 
 const UserMenu = ({
-  loggedUser: { role, personalData },
+  loggedUser: { isAdmin, personalData },
   onSignOut,
   isMobile,
   ...rest
@@ -65,10 +64,10 @@ const UserMenu = ({
       >
         <MenuItem>
           <Link
-            to={role === USER_ROLES.USER ? '/user' : '/admin'}
+            to={!isAdmin ? '/user' : '/admin'}
             color="black"
           >
-            {role === USER_ROLES.USER ? 'My account' : 'Admin'}
+            {!isAdmin ? 'My account' : 'Admin'}
           </Link>
         </MenuItem>
         <MenuItem>
@@ -81,8 +80,8 @@ const UserMenu = ({
   ) : (
     <>
       <MobileBarNavButton
-        label={role === USER_ROLES.USER ? 'My account' : 'Admin'}
-        name={role === USER_ROLES.USER ? 'my-account' : 'admin'}
+        label={!isAdmin ? 'My account' : 'Admin'}
+        name={!isAdmin ? 'my-account' : 'admin'}
         onClick={handleMyAccountClick}
       />
       <MobileBarNavButton label="Logout" name="Logout" onClick={onSignOut} />
@@ -92,7 +91,7 @@ const UserMenu = ({
 
 UserMenu.propTypes = {
   loggedUser: PropTypes.shape({
-    role: PropTypes.string.isRequired,
+    isAdmin: PropTypes.bool.isRequired,
     personalData: PropTypes.shape({
       name: PropTypes.string.isRequired,
       picture: PropTypes.string,
