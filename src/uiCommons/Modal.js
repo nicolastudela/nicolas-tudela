@@ -20,7 +20,7 @@ function rand() {
   return 0
 }
 
-function getModalStyle(isMobile) {
+function getModalStyle(isMobile, fullWidth) {
   const top = 50 + rand()
   const left = 50 + rand()
 
@@ -28,7 +28,9 @@ function getModalStyle(isMobile) {
     top: `${top}%`,
     left: `${left}%`,
     transform: `translate(-${top}%, -${left}%)`,
-    width: isMobile ? '80%' : '50%',
+    width: isMobile || fullWidth ? '80%' : '50%',
+    maxHeight: '90%',
+    overflow: 'auto',
   }
 }
 
@@ -39,11 +41,12 @@ const CustomModal = ({
   description,
   withCloseButton,
   children,
+  fullWidth,
   ...rest
 }) => {
   const { isMobile } = useClientDeviceType()
   // getModalStyle is not a pure function, we roll the style only on the first render
-  const [modalStyle] = useState(() => getModalStyle(isMobile))
+  // const [modalStyle] = useState(() => getModalStyle(isMobile, fullWidth))
 
   return (
     <Modal
@@ -52,7 +55,10 @@ const CustomModal = ({
       open={open}
       onClose={onClose}
     >
-      <div style={modalStyle} className={modalStyleClass}>
+      <div
+        style={getModalStyle(isMobile, fullWidth)}
+        className={modalStyleClass}
+      >
         <Box
           p="l"
           justifySelf="center"
@@ -98,6 +104,7 @@ CustomModal.propTypes = {
   description: PropTypes.string,
   title: PropTypes.string,
   withCloseButton: PropTypes.bool,
+  fullWidth: PropTypes.bool,
 }
 
 CustomModal.defaultProps = {
@@ -105,6 +112,7 @@ CustomModal.defaultProps = {
   onClose: () => {},
   description: null,
   title: null,
+  fullWidth: false,
   withCloseButton: false,
 }
 

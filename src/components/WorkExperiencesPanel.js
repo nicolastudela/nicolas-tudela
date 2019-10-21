@@ -1,8 +1,17 @@
 import React from 'react'
-import { CircularProgress, Tooltip, Popover } from '@material-ui/core'
+import {
+  CircularProgress,
+  Tooltip,
+  Popover,
+  IconButton,
+} from '@material-ui/core'
+import { format, parseISO } from 'date-fns'
 import { ApolloError } from 'apollo-client'
 import PropTypes from 'prop-types'
 import { Box, Button } from '@smooth-ui/core-em'
+import EditIcon from '@material-ui/icons/Edit'
+import AddIcon from '@material-ui/icons/Add'
+import RemoveIcon from '@material-ui/icons/Delete'
 import { PROGRAMMING_SCOPES, PROGRAMMING_LANGUAGES } from 'constants'
 import { useClientDeviceType } from 'components/utils/useClientDeviceType'
 import { Select, Link, Text } from 'uiCommons'
@@ -51,6 +60,10 @@ const WorkExperiencesPanel = ({
   onScopeSelection,
   loading,
   error,
+  user,
+  onCreate,
+  onRemove,
+  onEdit,
   ...rest
 }) => {
   const { isMobile } = useClientDeviceType()
@@ -88,6 +101,8 @@ const WorkExperiencesPanel = ({
     return new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
   })
 
+  const isAdminUser = user && user.isAdmin
+
   return (
     <Box
       display="flex"
@@ -109,6 +124,11 @@ const WorkExperiencesPanel = ({
         <Text cursive size="subtitle" variant="h4">
           Work Experience
         </Text>
+        {isAdminUser && (
+          <IconButton onClick={onCreate}>
+            <AddIcon style={{ fontSize: 24 }} />
+          </IconButton>
+        )}
         <Select
           inputId="work-experiences-scope"
           name="scope"
@@ -137,80 +157,95 @@ const WorkExperiencesPanel = ({
         {error && <p>Error :(</p>}
         {!loading &&
           !error &&
-          scoped.map(
-            (
-              {
-                company,
-                companyWebsite,
-                position,
-                summary,
-                startDate,
-                endDate,
-                current,
-                programmingLanguages,
-                highlights,
-                technologies,
-              },
-              idx
-            ) => (
-              <Box key={`${company}-${companyWebsite}`} mb="xxl" width={9 / 10}>
-                <Text bold display="block" mb="l">
-                  {position}
-                </Text>
-                <Box>
-                  <Link
-                    href={`${companyWebsite}`}
-                    ariaLabel={`${company}`}
-                    underline
-                    color="darkBlue"
-                  >
-                    {company}
-                  </Link>
-                  {`, `}
-                  <Text bold size="s">{`${startDate} - ${
-                    current ? 'Present' : endDate
-                  }`}</Text>
-                </Box>
-                <Text size="s">{summary}</Text>
-                <Box
-                  display="flex"
-                  flexDirection="row"
-                  my="s"
-                  alignItems="center"
+          scoped.map((workExperience, idx) => (
+            <Box
+              key={`${workExperience.company}-${workExperience.companyWebsite}`}
+              mb="xxl"
+              width={9 / 10}
+            >
+              <Text bold display="block" mb="l">
+                {workExperience.position}
+              </Text>
+              <Box>
+                <Link
+                  href={`${workExperience.companyWebsite}`}
+                  ariaLabel={`${workExperience.company}`}
+                  underline
+                  color="darkBlue"
                 >
-                  {programmingLanguages.map(
+                  {workExperience.company}
+                </Link>
+                {`, `}
+                <Text bold size="s">{`${
+                  workExperience.startDate
+                    ? format(parseISO(workExperience.startDate), 'MMMM yyyy')
+                    : ''
+                } - ${
+                  workExperience.current
+                    ? 'Present'
+                    : format(parseISO(workExperience.endDate), 'MMMM yyyy')
+                }`}</Text>
+                {isAdminUser && (
+                  <IconButton onClick={() => onEdit(workExperience)}>
+                    <EditIcon style={{ fontSize: 24 }} />
+                  </IconButton>
+                )}
+                {isAdminUser && (
+                  <IconButton onClick={() => onRemove(workExperience)}>
+                    <RemoveIcon style={{ fontSize: 24 }} />
+                  </IconButton>
+                )}
+              </Box>
+              <Text size="s">{workExperience.summary}</Text>
+              <Box
+                display="flex"
+                flexDirection="row"
+                my="s"
+                alignItems="center"
+              >
+                {workExperience.programmingLanguages &&
+                  workExperience.programmingLanguages.map(
                     language => programmingLanguageIcons[language]
                   )}
-                  <Button
-                    size="sm"
-                    ml="l"
-                    aria-describedby={`${company}-${companyWebsite}-pop`}
-                    onClick={event =>
-                      handlePopOverClick(event, `${company}-${idx}-pop`)
-                    }
-                  >
-                    See More
-                  </Button>
-                  <Popover
-                    id={`${company}-${idx}-pop`}
-                    open={!!anchorEl && anchorId === `${company}-${idx}-pop`}
-                    anchorEl={anchorEl}
-                    onClose={handlehandlePopOverClose}
-                    anchorOrigin={{
-                      vertical: 'bottom',
-                      horizontal: 'center',
-                    }}
-                    transformOrigin={{
-                      vertical: 'top',
-                      horizontal: 'center',
-                    }}
-                  >
-                    <Box display="flex" flexDirection="row">
-                      {highlights && highlights.length > 0 && (
+                <Button
+                  size="sm"
+                  ml={workExperience.programmingLanguages ? 'l' : 0}
+                  aria-describedby={`${workExperience.company}-${
+                    workExperience.companyWebsite
+                  }-pop`}
+                  onClick={event =>
+                    handlePopOverClick(
+                      event,
+                      `${workExperience.company}-${idx}-pop`
+                    )
+                  }
+                >
+                  See More
+                </Button>
+                <Popover
+                  id={`${workExperience.company}-${idx}-pop`}
+                  open={
+                    !!anchorEl &&
+                    anchorId === `${workExperience.company}-${idx}-pop`
+                  }
+                  anchorEl={anchorEl}
+                  onClose={handlehandlePopOverClose}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center',
+                  }}
+                >
+                  <Box display="flex" flexDirection="row">
+                    {workExperience.highlights &&
+                      workExperience.highlights.length > 0 && (
                         <Box maxWidth="40%" m="l">
                           <Text cursive>Highlights</Text>
                           <ul>
-                            {highlights.map(light => (
+                            {workExperience.highlights.map(light => (
                               <Text as="li" size="xs" key={light}>
                                 {light}
                               </Text>
@@ -218,11 +253,12 @@ const WorkExperiencesPanel = ({
                           </ul>
                         </Box>
                       )}
-                      {technologies && technologies.length > 0 && (
+                    {workExperience.technologies &&
+                      workExperience.technologies.length > 0 && (
                         <Box maxWidth="40%" m="l">
                           <Text cursive>Technologies</Text>
                           <ul>
-                            {technologies.map(technology => (
+                            {workExperience.technologies.map(technology => (
                               <Text as="li" size="xs" key={technology}>
                                 {technology}
                               </Text>
@@ -230,12 +266,11 @@ const WorkExperiencesPanel = ({
                           </ul>
                         </Box>
                       )}
-                    </Box>
-                  </Popover>
-                </Box>
+                  </Box>
+                </Popover>
               </Box>
-            )
-          )}
+            </Box>
+          ))}
       </Box>
     </Box>
   )
@@ -248,6 +283,12 @@ WorkExperiencesPanel.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.objectOf(ApolloError),
   selectedScope: PropTypes.string,
+  user: PropTypes.shape({
+    isAdmin: PropTypes.bool.isRequired,
+  }),
+  onCreate: PropTypes.func,
+  onEdit: PropTypes.func,
+  onRemove: PropTypes.func,
 }
 
 WorkExperiencesPanel.defaultProps = {
@@ -256,7 +297,11 @@ WorkExperiencesPanel.defaultProps = {
   scope: null,
   loading: false,
   error: null,
+  user: null,
   selectedScope: null,
+  onCreate: () => {},
+  onEdit: () => {},
+  onRemove: () => {},
 }
 
 export default WorkExperiencesPanel

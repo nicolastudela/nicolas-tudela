@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Box, Button } from '@smooth-ui/core-em'
 import { InputAdornment, CircularProgress } from '@material-ui/core'
@@ -8,11 +8,20 @@ import { useMutation } from '@apollo/react-hooks'
 import { Text, Link, TextField } from 'uiCommons'
 import { useLoggedUser } from 'components/utils/useLoggedUser'
 import { SIGN_IN } from 'graphqlSchema'
-import { validateEmail } from 'utils/formCommons'
+import { checkEmail } from 'utils/formCommons'
+import useFormControl from 'components/utils/useFormControl'
 
 const SignInPanel = ({ onClose }) => {
-  const [state, setState] = useState({
-    email: { touched: false, value: '', error: null },
+  const [
+    values,
+    errors,
+    meta,
+    sanitize,
+    validate,
+    handleChange,
+    isValid,
+  ] = useFormControl({
+    email: { touched: false, value: '', validators: [checkEmail], error: null },
     password: { touched: false, value: '', error: null },
   })
   const { onSignIn } = useLoggedUser()
@@ -22,44 +31,12 @@ const SignInPanel = ({ onClose }) => {
     },
   })
 
-  const isValid = () => {
-    const errors = [...Object.values(state)].filter(
-      ({ touched, error: fieldError }) => !touched || !!fieldError
-    )
-    return errors.length === 0
-  }
-
-  const handleChange = name => ({ target: { value } }) => {
-    const field = state[name]
-
-    if (!value || value === '') {
-      field.error = 'This field is required'
-    } else {
-      field.error = null
-    }
-
-    if (name === 'email') {
-      if (!validateEmail(value)) {
-        field.error = 'Please input a valid email'
-      } else {
-        field.error = null
-      }
-    }
-    field.touched = true
-    field.value = value
-
-    setState({ ...state, ...{ [name]: field } })
-  }
-
   const emailSignin = async event => {
     event.preventDefault()
-    if (isValid()) {
+    if (validate()) {
       try {
         const { data } = await login({
-          variables: {
-            email: state.email.value,
-            password: state.password.value,
-          },
+          variables: sanitize(),
         })
         onClose(data.user)
       } catch (ApolloError) {
@@ -79,9 +56,9 @@ const SignInPanel = ({ onClose }) => {
           autoComplete="email"
           name="email"
           onChange={handleChange('email')}
-          value={state.email.value}
-          error={!!state.email.error}
-          helperText={state.email.error}
+          value={values.email}
+          error={!!errors.email}
+          helperText={errors.email}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -97,9 +74,9 @@ const SignInPanel = ({ onClose }) => {
           id="signin-password"
           label="Password"
           onChange={handleChange('password')}
-          value={state.password.value}
-          error={!!state.password.error}
-          helperText={state.password.error}
+          value={values.password}
+          error={!!errors.password}
+          helperText={errors.password}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">

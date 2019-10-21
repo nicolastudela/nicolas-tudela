@@ -8,6 +8,7 @@ export const typeDefs = gql`
 `
 export const resolvers = {}
 
+// TODO: needs documentation
 export const useCRUDMutation = (
   mutation,
   { queryToRefresh, objectToRefresh, refreshOperation }

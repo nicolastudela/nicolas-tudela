@@ -1,9 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-function getScrollY(ref) {
-  return ref.pageYOffset !== undefined ? ref.pageYOffset : ref.scrollTop
+// distance from the element's top to its topmost visible content.
+// When an element's content does not generate a vertical scrollbar,
+// then its scrollTop value is 0
+function getScrollY(target) {
+  return target.pageYOffset !== undefined
+    ? target.pageYOffset
+    : target.scrollTop
 }
 
+// It evaluates if the taget-element (event) was scrolled according the options given
+// If `disableHysteresis` is true:
+//  evaluates to true if element was scrolled from its topmost visible content
+// If `disableHysteresis` is false:
+//  evaluates to true if its scroll position was different than before
 function defaultTrigger(event, store, options) {
   const { disableHysteresis = false, threshold = 100 } = options
   const previous = store.current
@@ -32,6 +42,7 @@ export default function useScrollTrigger(options = {}) {
 
   useEffect(() => {
     const handleScroll = event => {
+      // Re-evaluate trigger when a scroll event is fired
       setTrigger(getTrigger(event, store, other))
     }
 

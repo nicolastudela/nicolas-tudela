@@ -1,12 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Box, Button } from '@smooth-ui/core-em'
 import { Select, TextField } from 'uiCommons'
 import { SKILL_LEVELS, PROGRAMMING_SCOPES } from 'constants'
-import { fromSelectValue, toIntValue } from 'utils/formCommons'
+import { fromSelectValue } from 'utils/formCommons'
+import useFormControl from 'components/utils/useFormControl'
+import { toInt, trim } from 'validator'
 
 const EditSkill = ({ skill, onSave, onClose, ...rest }) => {
-  const [state, setState] = useState({
+  const [
+    values,
+    errors,
+    meta,
+    sanitize,
+    validate,
+    handleChange,
+  ] = useFormControl({
     name: {
       touched: false,
       required: true,
@@ -27,55 +36,29 @@ const EditSkill = ({ skill, onSave, onClose, ...rest }) => {
     },
     keywords: {
       touched: false,
-      value: skill.keywords ? skill.keywords : '',
+      value: skill.keywords ? skill.keywords.join(', ') : '',
       error: null,
       required: false,
-      onSave: val => (val ? val.split(',') : null),
+      onSanitize: val => val.split(',').map(x => trim(x)),
     },
     priority: {
       touched: false,
-      value: skill.priority ? skill.priority : 'None',
+      value: skill.priority ? skill.priority.toString() : 'None',
       error: null,
       required: false,
-      onSave: val => toIntValue(fromSelectValue(val)),
+      onSanitize: val => {
+        const selectValue = fromSelectValue(val)
+        return selectValue ? toInt(selectValue) : selectValue
+      },
     },
   })
 
-  const isValid = () => {
-    const errors = [...Object.values(state)].filter(
-      ({ required, value, error: fieldError }) =>
-        (required && !value) || !!fieldError
-    )
-    return errors.length === 0
-  }
-
-  const handleChange = name => ({ target: { value } }) => {
-    const field = state[name]
-
-    if (field.required && (!value || value === '')) {
-      field.error = 'This field is required'
-    } else {
-      field.error = null
-    }
-
-    field.value = value
-    field.touched = true
-
-    setState({ ...state, ...{ [name]: field } })
-  }
-
   const save = async event => {
     event.preventDefault()
-    if (isValid()) {
+    if (validate()) {
       onSave({
         ...skill,
-        ...[...Object.entries(state)].reduce(
-          (acum, [key, val]) => ({
-            ...acum,
-            ...{ [key]: val.onSave ? val.onSave(val.value) : val.value },
-          }),
-          {}
-        ),
+        ...sanitize(),
       })
     }
   }
@@ -89,22 +72,22 @@ const EditSkill = ({ skill, onSave, onClose, ...rest }) => {
           autoComplete="name"
           name="name"
           onChange={handleChange('name')}
-          value={state.name.value}
-          error={!!state.name.error}
-          helperText={state.name.error}
+          value={values.name}
+          error={!!errors.name}
+          helperText={errors.name}
           variant="outlined"
           boxProps={{ my: { sm: 's', lg: 'l' } }}
-          required
+          required={meta.name.required}
         />
         <Box display="flex" flexDirection="row" justifyContent="space-between">
           <Select
             inputId="skill-scope"
             name="scope"
             label="Scope"
-            value={state.scope.value}
+            value={values.scope}
             onChange={handleChange('scope')}
             width={4 / 9}
-            required
+            required={meta.scope.required}
           >
             <option value="" disabled />
             {[...Object.values(PROGRAMMING_SCOPES)].map(scope => (
@@ -117,10 +100,10 @@ const EditSkill = ({ skill, onSave, onClose, ...rest }) => {
             inputId="skill-level"
             name="level"
             label="Level"
-            value={state.level.value}
+            value={values.level}
             onChange={handleChange('level')}
             width={4 / 9}
-            required
+            required={meta.level.required}
           >
             <option value="" disabled />
             {[...Object.values(SKILL_LEVELS)].map(level => (
@@ -135,20 +118,22 @@ const EditSkill = ({ skill, onSave, onClose, ...rest }) => {
           label="Keywords"
           name="keywords"
           onChange={handleChange('keywords')}
-          value={state.keywords.value}
-          error={!!state.keywords.error}
-          helperText={state.keywords.error || 'Accept comma separated values'}
+          value={values.keywords}
+          error={!!errors.keywords}
+          helperText={errors.keywords || 'Accept comma separated values'}
           variant="outlined"
           boxProps={{ my: { sm: 's', lg: 'l' } }}
+          required={meta.keywords.required}
         />
         <Select
           inputId="skill-priority"
           name="priority"
           label="Priority"
-          value={state.priority.value}
+          value={values.priority}
           onChange={handleChange('priority')}
           width={4 / 10}
           native
+          required={meta.priority.required}
         >
           <option value="None">None</option>
           {[1, 2, 3, 4].map(priority => (
@@ -176,7 +161,7 @@ const EditSkill = ({ skill, onSave, onClose, ...rest }) => {
             width={2 / 4}
             type="submit"
             variant="info"
-            disabled={!isValid()}
+            // disabled={!isValid()}
           >
             Save
           </Button>
