@@ -49,7 +49,7 @@ const Link = ({
       </Button>
     )
   } else {
-    return { children }
+    return children
   }
 
   return <CustomLink css={styles(underline)} aria-label={ariaLabel} {...rest} />

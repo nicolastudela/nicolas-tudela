@@ -6,32 +6,53 @@ import { ME } from 'graphqlSchema'
 const LoggedUserCtx = createContext(null)
 const LoggedUserProvider = ({ children }) => {
   const [loggedUser, setLoggedUser] = useState(null)
-  const [isLogged, setIsLogged] = useState(false)
   const apolloClient = useApolloClient()
-  const [getMe, { data, loading, called: meQueryCalled }] = useLazyQuery(ME)
+  const [
+    getMe,
+    {
+      data,
+      loading: meQueryLoading,
+      called: meQueryCalled,
+      refetch,
+      networkStatus,
+    },
+  ] = useLazyQuery(ME, {
+    notifyOnNetworkStatusChange: true,
+  })
+  // I need this to turn on/off loading flag when apollo-client is being reset
+  const [isOnSignOut, setIsOnSignOut] = useState(false)
 
-  if (localStorage.getItem('token') && !meQueryCalled && !isLogged) {
-    setIsLogged(true)
+  // This is is called when the page when the app is reloaded (fetches the user)
+  if (localStorage.getItem('token') && !meQueryCalled) {
     getMe()
   }
 
-  const onSignIn = token => {
+  const onSignIn = async token => {
     localStorage.setItem('token', token)
-    setIsLogged(true)
-    getMe()
+    if (!meQueryCalled) {
+      return getMe()
+    }
+    return refetch()
   }
 
-  const onSignOut = () => {
-    setIsLogged(false)
-    apolloClient.clearStore()
-    localStorage.clear()
+  const onSignOut = async () => {
+    localStorage.removeItem('token')
+    setIsOnSignOut(true)
+    await apolloClient.resetStore()
+    setIsOnSignOut(false)
+  }
+
+  // apolloQueryHooks provides the result of the query but we want to store it
+  // in our own state; With this check here we don't allow the state gets updated
+  // indefefinetly
+  if (data && data.me && !loggedUser) {
+    setLoggedUser(data.me)
+  } else if ((!data || !data.me) && loggedUser) {
     setLoggedUser(null)
   }
 
-  if (data && data.me && !loggedUser && isLogged) {
-    setLoggedUser(data.me)
-  }
-
+  // networkStatus === 4 means 'me' query is being refetched
+  const loading = isOnSignOut || meQueryLoading || networkStatus === 4
   return (
     <LoggedUserCtx.Provider
       value={{ loggedUser, loading, onSignIn, onSignOut }}

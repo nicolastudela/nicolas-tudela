@@ -1,30 +1,41 @@
 # nicolas-tudela
-Personal Site. It was created to use it as a portfolio and opportunity to try and research about new technologies. 
+Personal Site. It was created to use it as a portfolio and opportunity to research about new technologies. 
 
 The site will mainly provide information about myself, my work experience and some sort of blog, where users can post something.
 
 **The project is still on its early stage** 
 
-Data about resume and users flow will be handled by hitting an API that also on constrution -> https://github.com/nicolastudela/solari
+Mutable data, users, and auth flows are be handled by an API (built by me)  -> https://github.com/nicolastudela/solari
+
+## Responsive desing supporting 2 breakpoints
+
+The site responds well to several resolutions but for sake of simplicity it was build to support two main layouts mobile & non-mobile. 
+
+see [useMediaQuery](src/components/utils/useMediaQuery) 
 
 ## Tech/framework used
 
-<b>Built with</b>
+<b>Technologies & Frameworks</b>
 - [React.js](https://reactjs.org/) (Hooks)
 - [Babel 7](https://babeljs.io/)
 - [Webpack 4] 
-- [React-Router]
+- [React-Router v4]
 - [Emotion.js]
 - [Material.UI]
 - [SmoothUI]
+- [Apollo Client]
 
-
-
-## Next Steps
-
-- Need to define what architecture to use in terms of state management. I'd would try something differnt than any flux-like (redux) solutions; I might try apollo-client or just coding some vanilla implementation (with hooks). Apollo-Client might be a little bit overkill. But it can 
-be a good way to tackle api calls and also state management. TBD
-
+<b>[Reusable custom logic/functionality](src/components/utils)</b>
+- [useScrollTrigger](src/components/utils/useScrollTrigger)
+  It can be used to being notified whenever the user scrolls given element (default window)
+- [ScrollToTop](src/components/utils/ScrollToTop)
+  <ScrollToTop> component that will scroll the window up on every navigation
+- [useMediaQuery](src/components/utils/useMediaQuery)
+  Adaptation of Material's useMediaQuery hook to detect if document matches mobile/non-mobile media-queries 
+- [useLoggedUser](src/components/utils/useLoggedUser)
+  It provides user auth functions (signin/signout) and the logged user. Also provides a loading-flag indicating that an action related to the user is being performed
+- [useFormControl](src/components/utils/useFormControl)
+  Custom form validation. Non-intrusive form validation-state-control that allows to place custom validations and sanitize functions (convert from string values to wathever you like) on form fields.
 
 ## IMPLEMENTATION PLAN
 
@@ -68,4 +79,4 @@ deploy.
 * now dev - install local-lambda runs it locally altogether with hot-load support -> localhost (localhost:3000) (
 
 
-MIT © [Yourname]()
+MIT © [Nicolas Tudela]()

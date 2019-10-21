@@ -27,6 +27,7 @@ const colors = {
   darkBlue: '#001724',
   gray: '#edeeef',
   indigo: '#6610f2',
+  darkGray: 'rgba(0, 0, 0, 0.54)',
   // purple: '#6f42c1',
   // pink: '#e83e8c',
   // brick: '#bd4932',
@@ -48,8 +49,9 @@ const colors = {
 export default {
   ...theme,
   colors,
-  primary: '#001724',
+  primary: colors.lightBlue,
   info: 'rgba(0,153,204,.9)',
+  secondary: colors.darkGray,
   fontFamily: '"Roboto","Helvetica Neue",Arial,sans-serif',
   spaces,
   breakpoints: enhancedBreakpoints,

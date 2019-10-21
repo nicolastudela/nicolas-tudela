@@ -7,6 +7,7 @@ import {
   SkillsPanel,
   WorkExperiencesPanel,
   EditSkill,
+  EditWorkExperience,
 } from 'components'
 import { PROGRAMMING_SCOPES } from 'constants'
 import { Box } from '@smooth-ui/core-em'
@@ -18,6 +19,9 @@ import {
   CREATE_SKILL_MUTATION,
   REMOVE_SKILL_MUTATION,
   UPDATE_SKILL_MUTATION,
+  CREATE_WORK_EXPERIENCE_MUTATION,
+  REMOVE_WORK_EXPERIENCE_MUTATION,
+  UPDATE_WORK_EXPERIENCE_MUTATION,
   useCRUDMutation,
 } from 'graphqlSchema'
 import resumePdf from '../static/nicolas-tudela-cv.pdf'
@@ -29,6 +33,10 @@ const Resume = () => {
   const [updateSkill, { loading: updateSkillLoading }] = useMutation(
     UPDATE_SKILL_MUTATION.gql
   )
+  const [
+    updateWorkExperience,
+    { loading: updateWorkExperienceLoading },
+  ] = useMutation(UPDATE_WORK_EXPERIENCE_MUTATION.gql)
   const [createSkill, { loading: createSkillLoading }] = useCRUDMutation(
     CREATE_SKILL_MUTATION,
     {
@@ -39,6 +47,35 @@ const Resume = () => {
       },
     }
   )
+
+  const [
+    createWorkExperience,
+    { loading: createWorkExperienceLoading },
+  ] = useCRUDMutation(CREATE_WORK_EXPERIENCE_MUTATION, {
+    queryToRefresh: GET_RESUME,
+    objectToRefresh: 'resume',
+    refreshOperation: (resume, createdWorkExperience) => {
+      return {
+        workExperiences: resume.workExperiences.concat([createdWorkExperience]),
+      }
+    },
+  })
+
+  const [
+    removeWorkExperience,
+    { loading: removeWorkExperienceLoading },
+  ] = useCRUDMutation(REMOVE_WORK_EXPERIENCE_MUTATION, {
+    queryToRefresh: GET_RESUME,
+    objectToRefresh: 'resume',
+    refreshOperation: (resume, removedId) => {
+      return {
+        workExperiences: resume.workExperiences.filter(
+          experience => experience._id !== removedId
+        ),
+      }
+    },
+  })
+
   const [removeSkill, { loading: removeSkillLoading }] = useCRUDMutation(
     REMOVE_SKILL_MUTATION,
     {
@@ -70,7 +107,7 @@ const Resume = () => {
       removeSkill({ variables: { id: entity._id } })
     }
     if (type === ENTITY_TYPES.WORK_EXPERIENCE) {
-      /// run work experience mutation
+      removeWorkExperience({ variables: { id: entity._id } })
     }
   }
 
@@ -87,7 +124,11 @@ const Resume = () => {
       }
     }
     if (type === ENTITY_TYPES.WORK_EXPERIENCE) {
-      /// run work experience mutation
+      if (_id) {
+        updateWorkExperience({ variables: { id: _id, workExperience: entity } })
+      } else {
+        createWorkExperience({ variables: { workExperience: entity } })
+      }
     }
     // close modal && refresh skills or workExperiences?
     setSelectedEntity(null)
@@ -102,6 +143,12 @@ const Resume = () => {
   const skillsLoading =
     loading || createSkillLoading || removeSkillLoading || updateSkillLoading
 
+  const workExperienceLoading =
+    loading ||
+    createWorkExperienceLoading ||
+    removeWorkExperienceLoading ||
+    updateWorkExperienceLoading
+
   return (
     <>
       <Modal
@@ -110,6 +157,9 @@ const Resume = () => {
         open={!!selectedEntity}
         // open={true}
         onClose={onCloseModal}
+        fullWidth={
+          selectedEntity && selectedEntity.type === ENTITY_TYPES.WORK_EXPERIENCE
+        }
       >
         {selectedEntity && selectedEntity.type === ENTITY_TYPES.SKILL && (
           <EditSkill
@@ -118,6 +168,16 @@ const Resume = () => {
             skill={selectedEntity.entity}
           />
         )}
+        {selectedEntity &&
+          selectedEntity.type === ENTITY_TYPES.WORK_EXPERIENCE && (
+            <EditWorkExperience
+              onSave={skill =>
+                onSaveEntity(ENTITY_TYPES.WORK_EXPERIENCE, skill)
+              }
+              onClose={onCloseModal}
+              experience={selectedEntity.entity}
+            />
+          )}
       </Modal>
       <ContentPanel
         color="gray"
@@ -154,11 +214,16 @@ const Resume = () => {
       />
       <WorkExperiencesPanel
         experiences={data.resume ? data.resume.workExperiences : []}
-        loading={loading}
+        loading={workExperienceLoading}
         selectedScope={selectedScope}
         onScopeSelection={setSelectedScope}
         error={error}
         user={loggedUser}
+        onCreate={() => onCreate(ENTITY_TYPES.WORK_EXPERIENCE)}
+        onRemove={experience =>
+          onRemove(ENTITY_TYPES.WORK_EXPERIENCE, experience)
+        }
+        onEdit={experience => onEdit(ENTITY_TYPES.WORK_EXPERIENCE, experience)}
       />
     </>
   )

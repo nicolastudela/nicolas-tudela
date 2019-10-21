@@ -1,7 +1,17 @@
-const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+import { isInt, isEmail, isISO8601, isURL } from 'validator'
+
 export const fromSelectValue = val => (val === 'None' ? null : val)
-export const fromTextFieldValue = val => (val === '' ? null : val)
-export const toIntValue = val => {debugger; return (val ? Number.parseInt(val, 10) : null)}
-export const validateEmail = email => {
-  return re.test(email)
+export const checkInt = value =>
+  !isInt(value) ? 'Needs to be numberic value' : null
+export const checkRequiredField = field =>
+  field.required && !field.value ? 'This field is required' : null
+
+export const checkEmail = email => {
+  return !isEmail(email) ? 'Please input a valid email' : null
 }
+
+export const checkISODate = date => {
+  return !isISO8601(date) ? 'Please input a valid email' : null
+}
+
+export const checkURL = url => (!isURL(url) ? 'Please input a valid URL' : null)

@@ -68,11 +68,32 @@ export const CREATE_SKILL_MUTATION = {
   `,
 }
 
+export const CREATE_WORK_EXPERIENCE_MUTATION = {
+  operationName: `createWorkExperience`,
+  gql: gql`
+    mutation createWorkExperience($workExperience: WorkExperienceInput) {
+      createWorkExperience(workExperience: $workExperience) {
+        ...WorkExperience
+      }
+    }
+    ${fragments.workExperience}
+  `,
+}
+
 export const REMOVE_SKILL_MUTATION = {
   operationName: `removeSkill`,
   gql: gql`
     mutation removeSkill($id: ID!) {
       removeSkill(id: $id)
+    }
+  `,
+}
+
+export const REMOVE_WORK_EXPERIENCE_MUTATION = {
+  operationName: `removeWorkExperience`,
+  gql: gql`
+    mutation removeWorkExperience($id: ID!) {
+      removeWorkExperience(id: $id)
     }
   `,
 }
@@ -86,5 +107,20 @@ export const UPDATE_SKILL_MUTATION = {
       }
     }
     ${fragments.skill}
+  `,
+}
+
+export const UPDATE_WORK_EXPERIENCE_MUTATION = {
+  operationName: `updateWorkExperience`,
+  gql: gql`
+    mutation updateWorkExperience(
+      $id: ID!
+      $workExperience: WorkExperienceInput
+    ) {
+      updateWorkExperience(id: $id, workExperience: $workExperience) {
+        ...WorkExperience
+      }
+    }
+    ${fragments.workExperience}
   `,
 }
