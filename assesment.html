@@ -1,0 +1,195 @@
+<html>
+
+<head>
+  <style type="text/css">
+    body {
+      font-size: calc(1vw + 1vh + .5vmin);
+      font-family: 'GothamBold';
+    }
+
+    .featuredDeals {
+      background-color: #f9f9f9;
+    }
+
+    .title {
+      font-weight: bold;
+      text-align: center;
+      margin: 1em;
+    }
+
+    .deals {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .deal {
+      position: relative;
+      border: 1px solid black;
+      width: 13em;
+      min-width: 256px;
+      margin-top: 0.1em;
+    }
+
+    .deal-background {
+      width: 100%;
+      height: 187px;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: 50%;
+    }
+
+    .deal-logo-img {
+      position: absolute;
+      height: 128px;
+      width: 128px;
+      left: 50%;
+      margin-left: -64px;
+      top: 50%;
+      margin-top: -64px;
+    }
+
+    .deal-content {
+      margin-bottom: 20px;
+    }
+
+    .deal-title {
+      color: black;
+      font-size: 22px;
+      line-height: 22px;
+      padding-bottom: 5px;
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .deal-subtitle {
+      color: #43ae3c;
+      font-family: 'GothamMediumRegular';
+      font-size: 18px;
+      line-height: 20px;
+      text-align: center;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .deal {
+        margin: 0.1em auto;
+      }
+  </style>
+  <script type="text/javascript">
+    fetchWithRetry = (url, maxRetries = 5, delayUnitTime = 10) => new Promise((resolve, reject) => {
+      let retriesCount = 0
+      // We could always change this hardcoded array for a dymanic serie
+      const delayTimes = [0, 1, 4, 16, 32]
+      function onSuccess(response) {
+        resolve(response);
+      }
+      function onFailure(error) {
+        if (retriesCount >= delayTimes.length) {
+          reject(error);
+          return;
+        }
+        setTimeout(fetchUrl, delayUnitTime * delayTimes[retriesCount])
+        retriesCount++;
+      }
+      const fetchUrl = () => fetch(url).then(onSuccess).catch(onFailure);
+
+      fetchUrl();
+    })
+
+    fetchAndUpdateElement = (url, resultElementId, loadingElementId) => {
+      const resultElement = document.getElementById(resultElementId)
+      resultElement.style.display = "none"
+      const loadingElement = document.getElementById(loadingElementId)
+      loadingElement.style.display = "block"
+      fetchWithRetry(url).then((val) => resultElement.innerHTML = 'Fetch Successful').catch(
+        (reason) => resultElement.innerHTML = reason).finally(() => { loadingElement.style.display = "none", resultElement.style.display = "block" })
+    }
+  </script>
+</head>
+
+<body>
+  <div class="featuredDeals">
+    <div class="title">
+      Featured Deals
+    </div>
+    <div class="deals">
+      <div class="deal">
+        <img class="deal-logo-img" width="128" height="128" alt="net-a-porter"
+          src="https://api.globaldatabase.com/logo/net-a-porter.com/" />
+        <div
+          style="background-image: url(https://martinroll.com/wp-content/uploads/Net-A-Porter-Revolutionizing-the-global-fashion-industry-Martin-Roll-2-740x350.jpg)"
+          class="deal-background">
+        </div>
+        <div class="deal-content">
+          <div class="deal-title">
+            Free 3-day Shipping & Free Returns
+          </div>
+          <div class="deal-subtitle">
+            Plus 6% cash back
+          </div>
+        </div>
+      </div>
+      <div class="deal">
+        <img class="deal-logo-img" width="128" height="128" alt="blue-nile"
+          src="https://pbs.twimg.com/profile_images/2684583821/2ddc44b7fa3a2ceb5c244762fd3e6a3b.png" />
+        <div
+          style="background-image: url(https://www.vouchercodes.co.uk/static/v10/images/promo-spots/dt-4-col_20191031143535@2x.jpg)"
+          class="deal-background">
+        </div>
+        <div class="deal-content">
+
+          <div class="deal-title">
+            Free Shipping on $50
+          </div>
+          <div class="deal-subtitle">
+            Plus 4% cash back
+          </div>
+        </div>
+      </div>
+      <div class="deal">
+        <img class="deal-logo-img" width="128" height="128" alt="old-navy"
+          src="https://is2-ssl.mzstatic.com/image/thumb/Purple128/v4/f4/43/b4/f443b431-a1d9-2ad8-3daf-ca0329f2bee2/source/256x256bb.jpg" />
+        <div
+          style="background-image: url(https://image.shutterstock.com/image-photo/designer-wedding-rings-corner-on-260nw-741451888.jpg)"
+          class="deal-background">
+        </div>
+        <div class="deal-content">
+
+          <div class="deal-title">
+            20% Off Select Items
+          </div>
+          <div class="deal-subtitle">
+            Plus 5% cash back
+          </div>
+        </div>
+      </div>
+      <div class="deal">
+        <img class="deal-logo-img" width="128" height="128" alt="staples"
+          src="https://res-4.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/v1474641785/dpl9lb22fiqpy24iae5p.jpg" />
+        <div
+          style="background-image: url(https://thumbs.dreamstime.com/b/used-staples-staple-needle-lot-background-41655250.jpg)"
+          class="deal-background">
+        </div>
+        <div class="deal-content">
+          <div class="deal-title">
+            Free Shipping on $49.99+
+          </div>
+          <div class="deal-subtitle">
+            Plus 5% cash back
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <label id="url-label">Enter a url: </label>
+  <input aria-labelledby="url-label" id="url" type="text" />
+
+  <button type="button"
+    onclick="fetchAndUpdateElement(document.getElementById('url').value , 'fetchResult','loading')">Fetch and
+    Retry </button>
+  <div id="loading" style="display: none;">Loading</div>
+  <div id="fetchResult" />
+</body>
+
+</html>

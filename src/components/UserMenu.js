@@ -10,6 +10,7 @@ const UserMenu = ({
   loggedUser: { isAdmin, personalData },
   onSignOut,
   isMobile,
+  onClose,
   ...rest
 }) => {
   const [anchorEl, setAnchorEl] = useState(null)
@@ -18,10 +19,12 @@ const UserMenu = ({
     setAnchorEl(event.currentTarget)
   }
 
-  function handleMyAccountClick(event) {}
-
   function handleClose() {
     setAnchorEl(null)
+  }
+
+  function handleMyAccountClick(event) {
+    onClose(event)
   }
 
   const user = personalData
@@ -63,10 +66,7 @@ const UserMenu = ({
         elevation={0}
       >
         <MenuItem>
-          <Link
-            to={!isAdmin ? '/user' : '/admin'}
-            color="black"
-          >
+          <Link to={!isAdmin ? '/user' : '/admin'} color="black">
             {!isAdmin ? 'My account' : 'Admin'}
           </Link>
         </MenuItem>
@@ -82,6 +82,7 @@ const UserMenu = ({
       <MobileBarNavButton
         label={!isAdmin ? 'My account' : 'Admin'}
         name={!isAdmin ? 'my-account' : 'admin'}
+        to={!isAdmin ? '/user' : '/admin'}
         onClick={handleMyAccountClick}
       />
       <MobileBarNavButton label="Logout" name="Logout" onClick={onSignOut} />
@@ -99,6 +100,7 @@ UserMenu.propTypes = {
   }),
   onSignOut: PropTypes.func.isRequired,
   isMobile: PropTypes.bool,
+  onClose: PropTypes.func,
 }
 
 UserMenu.defaultProps = {
@@ -108,6 +110,7 @@ UserMenu.defaultProps = {
     },
   },
   isMobile: false,
+  onClose: () => {},
 }
 
 export default UserMenu
