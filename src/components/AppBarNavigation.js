@@ -132,6 +132,7 @@ const AppBarNavigation = () => {
                 isMobile={isMobile}
                 onSignOut={onSignOut}
                 loggedUser={loggedUser}
+                onClose={toggleDrawer(false)}
               />
             )}
           </Drawer>

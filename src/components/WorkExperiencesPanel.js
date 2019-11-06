@@ -12,7 +12,10 @@ import { Box, Button } from '@smooth-ui/core-em'
 import EditIcon from '@material-ui/icons/Edit'
 import AddIcon from '@material-ui/icons/Add'
 import RemoveIcon from '@material-ui/icons/Delete'
-import { PROGRAMMING_SCOPES, PROGRAMMING_LANGUAGES } from 'constants'
+import {
+  PROGRAMMING_SCOPES,
+  PROGRAMMING_LANGUAGES,
+} from 'constants/resumeConstants'
 import { useClientDeviceType } from 'components/utils/useClientDeviceType'
 import { Select, Link, Text } from 'uiCommons'
 import { javascript, java, php, scala, rails } from 'icons'

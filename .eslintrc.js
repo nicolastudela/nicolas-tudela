@@ -4,7 +4,7 @@ module.exports = {
     es6: true,
   },
   parser: "babel-eslint",
-  extends: ["airbnb","plugin:prettier/recommended", "prettier/react"],
+  extends: ["airbnb","plugin:jest/all", "plugin:prettier/recommended", "prettier/react"],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -21,8 +21,10 @@ module.exports = {
   },
   plugins: [
     'react',
+    'eslint-plugin-jest'
   ],
   rules: {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "jest/prefer-inline-snapshots": "off",
   },
 };

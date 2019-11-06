@@ -3,21 +3,21 @@ import PropTypes from 'prop-types'
 import { Button } from '@smooth-ui/core-em'
 import { NavLink } from 'react-router-dom'
 
-const MobileBarNavButton = ({ name, label, onClick, ...rest }) => {
-  const CustomButton = Button.withComponent(NavLink)
+const MobileBarNavButton = ({ name, label, to, ...rest }) => {
+  const CustomButton = to ? Button.withComponent(NavLink) : Button
 
   return (
     <CustomButton
       activeStyle={{ color: 'lightBlue' }}
       color="white"
       variant="secondary"
-      {...rest}
       fontSize="1.5em"
       fontFamily="'Lobster',cursive"
       textAlign="center"
       width={1}
       exact
-      onClick={onClick}
+      to={to}
+      {...rest}
     >
       {label}
     </CustomButton>
@@ -27,7 +27,13 @@ const MobileBarNavButton = ({ name, label, onClick, ...rest }) => {
 MobileBarNavButton.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
+  to: PropTypes.string,
+}
+
+MobileBarNavButton.defaultProps = {
+  onClick: () => {},
+  to: null,
 }
 
 export default MobileBarNavButton

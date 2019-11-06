@@ -202,7 +202,7 @@ const Resume = () => {
         )}
       </ContentPanel>
       <SkillsPanel
-        skills={data.resume ? data.resume.skills : []}
+        skills={data && data.resume ? data.resume.skills : []}
         loading={skillsLoading}
         selectedScope={selectedScope}
         onScopeSelection={setSelectedScope}
@@ -213,7 +213,7 @@ const Resume = () => {
         onEdit={skill => onEdit(ENTITY_TYPES.SKILL, skill)}
       />
       <WorkExperiencesPanel
-        experiences={data.resume ? data.resume.workExperiences : []}
+        experiences={data && data.resume ? data.resume.workExperiences : []}
         loading={workExperienceLoading}
         selectedScope={selectedScope}
         onScopeSelection={setSelectedScope}

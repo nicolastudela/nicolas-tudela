@@ -8,7 +8,7 @@
         "corejs": 3
       }
     ],
-    "@babel/react",
+    "@babel/preset-react",
     "@emotion/babel-preset-css-prop"
-  ],
+  ]
 }

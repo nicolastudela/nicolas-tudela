@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Typography } from '@smooth-ui/core-em'
+import { Box } from '@smooth-ui/core-em'
 import { TitleAndSubtitle, ContentPanel } from 'components'
 import { Text } from 'uiCommons'
 import workingNico from 'images/working-nico-lg.jpg'

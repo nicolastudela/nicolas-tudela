@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`workExperiencePanel renders properly 1`] = `
+<div
+  className="sui-box css-h0qxdx"
+  scope={null}
+>
+  <div
+    className="sui-box css-j08uvi"
+  >
+    <h4
+      className="sui-typo css-1t3nrxz"
+    >
+      Work Experience
+    </h4>
+    <div
+      className="sui-box css-14y7cnv"
+    >
+      <div
+        className="MuiFormControl-root MuiFormControl-fullWidth"
+      >
+        <label
+          className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated"
+          data-shrink={false}
+          htmlFor="work-experiences-scope"
+          style={
+            Object {
+              "fontFamily": "'Lobster',cursive",
+              "fontSize": "0.6em",
+            }
+          }
+        >
+          Scope
+        </label>
+        <div
+          className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+          onClick={[Function]}
+        >
+          <select
+            aria-invalid={false}
+            className="MuiSelect-root MuiSelect-select MuiInputBase-input MuiInput-input css-1ks6mca MuiInputBase-inputSelect"
+            disabled={false}
+            id="work-experiences-scope"
+            multiple={false}
+            name="scope"
+            onAnimationStart={[Function]}
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            required={false}
+            value={null}
+          >
+            <option
+              value="BACK_END"
+            >
+              BACK_END
+            </option>
+            <option
+              value="FRONT_END"
+            >
+              FRONT_END
+            </option>
+            <option
+              value="FULL_STACK"
+            >
+              FULL_STACK
+            </option>
+          </select>
+          <svg
+            aria-hidden="true"
+            className="MuiSvgIcon-root MuiSelect-icon"
+            focusable="false"
+            role="presentation"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7 10l5 5 5-5z"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="sui-box css-b29nt6"
+  />
+</div>
+`;

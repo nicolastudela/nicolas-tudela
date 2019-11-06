@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`contact page renders propery 1`] = `
+Array [
+  <div
+    className="sui-box css-1nkjupr"
+  >
+    <div
+      className="sui-box css-p74edf"
+    >
+      <h1
+        className="sui-typo css-17fvmi5"
+      >
+        Conect with me today
+      </h1>
+    </div>
+  </div>,
+  <div
+    className="sui-box css-2zoooe"
+  >
+    <div
+      className="sui-box css-1oswc43"
+    >
+      <div
+        className="LI-profile-badge"
+        data-locale="es_ES"
+        data-size="large"
+        data-theme="light"
+        data-type="horizontal"
+        data-vanity="nicolas-tudela-85455a2b"
+        data-version="v1"
+      >
+        <a
+          className="LI-simple-link"
+          href="https://ar.linkedin.com/in/nicolas-tudela-85455a2b?trk=profile-badge"
+        >
+          Nicolas Tudela
+        </a>
+      </div>
+      <div
+        className="sui-box css-8qkufk"
+      >
+        <a
+          display="block"
+          href="mailto:nicolastudela@gmail.com"
+          rel="noopener noreferrer"
+          tabIndex="0"
+          target="_blank"
+        >
+          <img
+            alt="gmailLogo"
+            src="test-file-stub"
+            style={
+              Object {
+                "height": "256px",
+                "width": "256px",
+              }
+            }
+          />
+        </a>
+      </div>
+      <div
+        className="sui-box css-8qkufk"
+      >
+        <a
+          display="block"
+          href="https://join.skype.com/invite/BfPs9S9gdahK"
+          rel="noopener noreferrer"
+          tabIndex="0"
+          target="_blank"
+        >
+          <img
+            alt="skypeLogo"
+            src="test-file-stub"
+            style={
+              Object {
+                "height": "256px",
+                "width": "256px",
+              }
+            }
+          />
+        </a>
+      </div>
+    </div>
+  </div>,
+  <div
+    className="sui-box css-ga31l5"
+  >
+    <div
+      className="sui-box css-z1ly8m"
+    >
+      <div
+        className="sui-box css-1dhq5gn"
+      />
+      <div
+        className="sui-box css-1dhq5gn"
+      />
+      <div
+        className="sui-typo css-1vubwr0-Contact"
+      >
+        Feel free to reach out to me if you have any questions or comments about the services I offer. Also, you could always just send me a friendly hello.
+      </div>
+    </div>
+  </div>,
+]
+`;

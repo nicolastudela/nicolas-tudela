@@ -1,0 +1,233 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders properly renders propery 1`] = `
+Array [
+  <div
+    className="sui-box css-dt2wog"
+  >
+    <div
+      className="sui-box css-vra3p"
+    >
+      <div
+        className="sui-box css-19o4x8g"
+      >
+        <h4
+          className="sui-typo css-1kpc9cp-TitleAndSubtitle"
+        >
+          I'm here to create meaningful and lasting relationships with my clients.
+        </h4>
+        <h1
+          className="sui-typo css-1pfti3x"
+        >
+          LET'S BUILD SOMETHING AMAZING TOGETHER
+        </h1>
+      </div>
+      <div
+        className="sui-box css-14y7cnv"
+      >
+        <img
+          alt="nico"
+          src="test-file-stub"
+          style={
+            Object {
+              "height": "100%",
+              "width": "100%",
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>,
+  <div
+    className="sui-box css-1g221ke"
+  >
+    <div
+      className="sui-box css-1sn81vv"
+    >
+      <div
+        className="sui-box css-1oruqn9"
+      >
+        <div
+          className="sui-box css-8qkufk"
+        >
+          <img
+            alt="javascript"
+            src="test-file-stub"
+            style={
+              Object {
+                "display": "block",
+                "height": "250px",
+              }
+            }
+          />
+        </div>
+        <div
+          className="sui-box css-8qkufk"
+        >
+          <h4
+            className="sui-typo css-773ch4"
+          >
+            I choose Javascript
+          </h4>
+          <p
+            className="sui-typo css-xxpvjg"
+          >
+            I find in Javascript a powerfull language where it gives you the
+              chance to work on both backend and frontend sides seamlessly. It has a
+              huge commutity support and it's constantly evolving to make develop experience great
+          </p>
+        </div>
+      </div>
+      <div
+        className="sui-box css-1oruqn9"
+      >
+        <div
+          className="sui-box css-8qkufk"
+        >
+          <img
+            alt="fullstack"
+            src="test-file-stub"
+            style={
+              Object {
+                "display": "block",
+                "height": "250px",
+              }
+            }
+          />
+        </div>
+        <div
+          className="sui-box css-8qkufk"
+        >
+          <h4
+            className="sui-typo css-773ch4"
+          >
+            Fullstack developer
+          </h4>
+          <p
+            className="sui-typo css-xxpvjg"
+          >
+            Specialization its great to achieve complex problems but having in-depth knowledge and experience of on every topic related to the app development gives you a 360 degree view, which it's useful to get a better understanding of the project requirements
+          </p>
+        </div>
+      </div>
+      <div
+        className="sui-box css-1oruqn9"
+      >
+        <div
+          className="sui-box css-8qkufk"
+        >
+          <img
+            alt="over10years"
+            src="test-file-stub"
+            style={
+              Object {
+                "display": "block",
+                "height": "250px",
+              }
+            }
+          />
+        </div>
+        <div
+          className="sui-box css-8qkufk"
+        >
+          <h4
+            className="sui-typo css-773ch4"
+          >
+            Experience
+          </h4>
+          <p
+            className="sui-typo css-xxpvjg"
+          >
+            Throughout my work experience, I learned the importance of having good communication skills, paying attention to detail and building reliable code. 
+          My career started as a Java developer but these last few years I’ve switched to Javascript and I’m loving it.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>,
+  <div
+    className="sui-box css-6kpvtv"
+  >
+    <div
+      className="sui-box css-p74edf"
+    >
+      <h1
+        className="sui-typo css-1gvloca"
+      >
+        Keys to success when working remotely
+      </h1>
+      <p
+        className="sui-typo css-162m00r"
+      >
+        The keys to creating meaningful and lasting relationships are transparency, authenticity and openness. Expectations must be set, shared and clarified.
+        <br />
+        <br />
+         Open and frequent communication is fundamental. Having proper communication tools such as slack and zoom helps a lot. Holding regular meetings as well as practicing Agile methodologies is a must.
+        <br />
+        <br />
+         Trust is another important key. We definitely have to build trust. That is why we have to be as transparent and clear as possible. Ongoing communication and having personal or off-topic chats can help too.
+      </p>
+    </div>
+  </div>,
+  <div
+    className="sui-box css-2zoooe"
+  >
+    <div
+      className="sui-box css-p74edf"
+    >
+      <h4
+        className="sui-typo css-1kpc9cp-TitleAndSubtitle"
+      >
+        I'm here to create meaningful and lasting relationships with my clients.
+      </h4>
+      <h1
+        className="sui-typo css-1pfti3x"
+      >
+        LET'S BUILD SOMETHING AMAZING TOGETHER
+      </h1>
+    </div>
+  </div>,
+  <div
+    className="sui-box css-1nkjupr"
+  >
+    <div
+      className="sui-box css-p74edf"
+    >
+      <h4
+        className="sui-typo css-2fidxc-TitleAndSubtitle"
+      >
+        I'm here to create meaningful and lasting relationships with my clients.
+      </h4>
+      <h1
+        className="sui-typo css-17fvmi5"
+      >
+        LET'S BUILD SOMETHING AMAZING TOGETHER
+      </h1>
+    </div>
+  </div>,
+  <div
+    className="sui-box css-ga31l5"
+  >
+    <div
+      className="sui-box css-p74edf"
+    >
+      <h4
+        className="sui-typo css-13rfub6-TitleAndSubtitle"
+      >
+        I'm here to create meaningful and lasting relationships with my clients.
+      </h4>
+      <h1
+        className="sui-typo css-17fvmi5"
+      >
+        LET'S BUILD SOMETHING AMAZING TOGETHER
+      </h1>
+      <div
+        className="sui-box css-1li2717"
+      />
+      <div
+        className="sui-box css-n9duf6"
+      />
+    </div>
+  </div>,
+]
+`;
