@@ -71,7 +71,11 @@ deploy.
 
 
 ## Tests
-// TODO: No tests yet, I think I will test the app using Jest, since I already know it workl :(
+* npm run test
+
+It uses
+* Jest 
+* React-testing-library
 
 ## How to use?
 * npm run start - will start the dev-server /hot-reload (localhost:3000)
