@@ -17,8 +17,10 @@ import {
   PROGRAMMING_LANGUAGES,
 } from 'constants/resumeConstants'
 import { useClientDeviceType } from 'components/utils/useClientDeviceType'
+
 import { Select, Link, Text } from 'uiCommons'
 import { javascript, java, php, scala, rails } from 'icons'
+import WorkExperienceDetail from './WorkExperienceDetail'
 
 const programmingLanguageIcons = [
   ...Object.entries(PROGRAMMING_LANGUAGES),
@@ -242,34 +244,12 @@ const WorkExperiencesPanel = ({
                     horizontal: 'center',
                   }}
                 >
-                  <Box display="flex" flexDirection="row">
-                    {workExperience.highlights &&
-                      workExperience.highlights.length > 0 && (
-                        <Box maxWidth="40%" m="l">
-                          <Text cursive>Highlights</Text>
-                          <ul>
-                            {workExperience.highlights.map(light => (
-                              <Text as="li" size="xs" key={light}>
-                                {light}
-                              </Text>
-                            ))}
-                          </ul>
-                        </Box>
-                      )}
-                    {workExperience.technologies &&
-                      workExperience.technologies.length > 0 && (
-                        <Box maxWidth="40%" m="l">
-                          <Text cursive>Technologies</Text>
-                          <ul>
-                            {workExperience.technologies.map(technology => (
-                              <Text as="li" size="xs" key={technology}>
-                                {technology}
-                              </Text>
-                            ))}
-                          </ul>
-                        </Box>
-                      )}
-                  </Box>
+                  <WorkExperienceDetail
+                    workExperience={workExperience}
+                    justifyContent="space-around"
+                    minWidth="300px"
+                    maxWidth="500px"
+                  />
                 </Popover>
               </Box>
             </Box>

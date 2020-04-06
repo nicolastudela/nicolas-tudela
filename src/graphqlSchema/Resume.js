@@ -55,6 +55,15 @@ export const GET_RESUME = gql`
   ${fragments.workExperience}
   ${fragments.skill}
 `
+export const GET_NICOLAS_TUDELA_SITE_EXPERIENCE = gql`
+  query thisSiteExperience {
+    nicolasTudelaSiteExperience { 
+      _id
+      highlights
+      technologies
+    }
+  }
+`
 
 export const CREATE_SKILL_MUTATION = {
   operationName: `createSkill`,
