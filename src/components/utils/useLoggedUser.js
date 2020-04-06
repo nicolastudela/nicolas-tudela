@@ -3,7 +3,12 @@ import PropTypes from 'prop-types'
 import { useLazyQuery, useApolloClient } from '@apollo/react-hooks'
 import { ME } from 'graphqlSchema'
 
-const LoggedUserCtx = createContext(null)
+const LoggedUserCtx = createContext({
+  loggedUser: null,
+  loading: false,
+  onSignIn: () => {},
+  onSignOut: () => {},
+})
 const LoggedUserProvider = ({ children }) => {
   const [loggedUser, setLoggedUser] = useState(null)
   const apolloClient = useApolloClient()
