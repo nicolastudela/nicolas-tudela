@@ -1,8 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Typography } from '@smooth-ui/core-em'
+import styled from '@emotion/styled'
+import { style, typography } from '@material-ui/core/system'
 
-const Text = ({ truncate, bold, size, cursive, children, ...rest }) => {
+const variant = style({
+  prop: 'variant',
+  cssProperty: false,
+  themeKey: 'typography',
+})
+
+const StyledText = styled.span`
+  font-family: Helvetica;
+  ${variant}
+  ${typography}
+`
+
+const Text = ({ truncate, size, cursive, children, ...rest }) => {
   let custom = {}
 
   let fontSize
@@ -31,9 +44,10 @@ const Text = ({ truncate, bold, size, cursive, children, ...rest }) => {
     custom = { ...custom, fontWeight: 'bold' }
   }
 
-  let style
+  // TODO (not supported on via props?)
+  let inlineStyle
   if (truncate === 'ellipsis') {
-    style = {
+    inlineStyle = {
       textOverflow: 'ellipsis',
       whiteSpace: 'nowrap',
       overflow: 'hidden',
@@ -41,9 +55,9 @@ const Text = ({ truncate, bold, size, cursive, children, ...rest }) => {
   }
 
   return (
-    <Typography {...custom} {...rest} style={style}>
+    <StyledText {...custom} {...rest} style={inlineStyle}>
       {children}
-    </Typography>
+    </StyledText>
   )
 }
 

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { Box, Typography } from '@smooth-ui/core-em'
 import { useQuery } from '@apollo/react-hooks'
-import { Drawer } from '@material-ui/core'
+import { Box, Drawer } from '@material-ui/core'
 import { Link, Text } from 'uiCommons'
 import { useClientDeviceType } from 'components/utils/useClientDeviceType'
 import { GET_NICOLAS_TUDELA_SITE_EXPERIENCE } from 'graphqlSchema'
@@ -50,7 +49,7 @@ const Footer = () => {
           </Box>
         </Box>
       </Drawer>
-      <Typography color="white" fontFamily="'Lobster',cursive">
+      <Text color="white" fontFamily="'Lobster',cursive">
         <Box
           py="xxl"
           px="m"
@@ -58,7 +57,7 @@ const Footer = () => {
           justifyContent="space-between"
           backgroundColor="darkBlue"
         >
-          <Typography>© 2020 Nicolas Tudela. All rights reserved.</Typography>
+          <Text>© 2020 Nicolas Tudela. All rights reserved.</Text>
           <Link
             onClick={toggleDrawer(true)}
             ariaLabel="About this site"
@@ -67,7 +66,7 @@ const Footer = () => {
             About this site
           </Link>
         </Box>
-      </Typography>
+      </Text>
     </footer>
   )
 }

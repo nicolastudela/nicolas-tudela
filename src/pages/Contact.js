@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { TitleAndSubtitle, ContentPanel } from 'components'
-import { Box, Typography } from '@smooth-ui/core-em'
-import { Space } from 'uiCommons'
+import { Box, Space, Text } from 'uiCommons'
 import { useClientDeviceType } from 'components/utils/useClientDeviceType'
 import { gmailLogo, skypeLogo, backgrKeyword } from 'images'
 import linkedinBadgeCreator from '../utils/linkedinBadgeCreator'
@@ -30,7 +29,7 @@ const LinkedinBox = () => {
     </div>
   )
 }
-
+// TODO (try it live)
 const Contact = () => {
   const { isMobile } = useClientDeviceType()
   return (
@@ -98,17 +97,17 @@ const Contact = () => {
             <Space kind="inline" size="xxl" />
           </>
         )}
-        <Typography
+        <Text
           css={{ textShadow: '2px 2px 2px rgba(0,153,204,.9)' }}
           color="white"
           fontFamily="'Lobster',cursive"
           fontSize="1.5em"
-          as="div"
+          component="div"
         >
           Feel free to reach out to me if you have any questions or comments
           about the services I offer. Also, you could always just send me a
           friendly hello.
-        </Typography>
+        </Text>
       </ContentPanel>
     </>
   )
