@@ -6,10 +6,8 @@
   "scripts": {
     "test": "jest",
     "build": "webpack --mode production",
-    "now-build": "webpack --mode production",
     "watch": "webpack --watch --mode development",
-    "start": "webpack-dev-server --open --mode development",
-    "now-dev": "webpack-dev-server --open --mode development"
+    "start": "webpack-dev-server --open --mode development"
   },
   "engines": {
     "node": "10.x"

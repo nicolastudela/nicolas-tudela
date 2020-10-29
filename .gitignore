@@ -12,3 +12,5 @@ chrome-user-data
 *.swp
 *.swo
 .env
+
+.vercel
