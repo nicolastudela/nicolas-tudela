@@ -1,14 +1,15 @@
 import React from 'react'
-import { Typography } from '@smooth-ui/core-em'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
+import { Text } from 'uiCommons'
 
 const BarNavLink = ({ onmouseLeave, name, selected, ...rest }) => {
   const custom = {
     textDecoration: 'none',
   }
 
-  const CustomLink = Typography.withComponent(NavLink)
+  // emotion feature (withComponent)
+  const CustomLink = Text.withComponent(NavLink)
 
   return (
     <CustomLink

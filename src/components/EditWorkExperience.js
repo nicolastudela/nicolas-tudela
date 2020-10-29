@@ -1,7 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Box, Button } from '@smooth-ui/core-em'
-import { Checkbox, IconButton, FormControl } from '@material-ui/core'
+import {
+  Box,
+  Button,
+  Checkbox,
+  IconButton,
+  FormControl,
+} from '@material-ui/core'
 import RemoveIcon from '@material-ui/icons/Delete'
 import AddIcon from '@material-ui/icons/Add'
 import { format } from 'date-fns'
@@ -142,7 +147,6 @@ const EditWorkExperience = ({ experience, onSave, onClose, ...rest }) => {
   }
 
   const handleChangeProgrammingLanguage = (key, { target: { checked } }) => {
-    debugger
     const programmingLanguages = checked
       ? values.programmingLanguages.concat([key])
       : values.programmingLanguages.filter(x => x !== key)
@@ -151,7 +155,6 @@ const EditWorkExperience = ({ experience, onSave, onClose, ...rest }) => {
   }
 
   const handleAddHighlight = () => {
-    debugger
     const id = shortId.generate()
     const updatedHighlights = {
       ...{ [id]: { id, text: '' } },

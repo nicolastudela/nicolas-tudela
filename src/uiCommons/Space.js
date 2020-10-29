@@ -1,6 +1,6 @@
 import React from 'react'
-import { Box } from '@smooth-ui/core-em'
 import PropTypes from 'prop-types'
+import Box from './Box'
 
 const Space = ({ size, kind }) => {
   const props = {}

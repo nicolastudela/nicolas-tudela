@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography } from '@smooth-ui/core-em'
+import { Text } from 'uiCommons'
 import PropTypes from 'prop-types'
 
 const textColorsByBackgroundColors = color => {
@@ -28,18 +28,18 @@ const TitleAndSubtitle = ({ subtitle, title, color, ...rest }) => {
   return (
     <>
       {subtitle && (
-        <Typography
+        <Text
           variant="h4"
           textAlign="center"
           color={colors.subtitle}
           fontFamily="'EB Garamond', serif"
           fontWeight="500"
-          css={{ fontStyle: 'italic' }}
+          fontStyle="italic"
         >
           {subtitle}
-        </Typography>
+        </Text>
       )}
-      <Typography
+      <Text
         variant="h1"
         textAlign="center"
         color={colors.title}
@@ -47,7 +47,7 @@ const TitleAndSubtitle = ({ subtitle, title, color, ...rest }) => {
         {...rest}
       >
         {title}
-      </Typography>
+      </Text>
     </>
   )
 }

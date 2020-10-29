@@ -1,7 +1,9 @@
 import React from 'react'
-import { Breakpoint, Box, Typography } from '@smooth-ui/core-em'
+import { Box } from '@smooth-ui/core-em'
 import { keyframes } from '@emotion/core'
 import football from 'icons/football.svg'
+import { Text } from 'uiCommons'
+import { useClientDeviceType } from 'components/utils/useClientDeviceType'
 import AppBarNavigation from './AppBarNavigation'
 import useScrollTrigger from './utils/useScrollTrigger'
 
@@ -33,6 +35,7 @@ const imgStyle = props => {
 
 const AppBar = props => {
   const scrolled = useScrollTrigger({ disableHysteresis: true, threshold: 100 })
+  const { isMobile } = useClientDeviceType()
 
   return (
     <header>
@@ -59,7 +62,7 @@ const AppBar = props => {
             />
           </Box>
           <Box display="flex" flexDirection="column" alignItems="center">
-            <Typography
+            <Text
               variant="h2"
               color="white"
               fontFamily="'Lobster',cursive"
@@ -67,17 +70,15 @@ const AppBar = props => {
               mb={0}
             >
               Nicolas Jose Tudela
-            </Typography>
-            {!scrolled && (
-              <Breakpoint up="md">
-                <Typography
-                  color="white"
-                  fontFamily="'Lobster',cursive"
-                  css={titleStyle}
-                >
-                  Remote Software Engineer &#183; Good vibes
-                </Typography>
-              </Breakpoint>
+            </Text>
+            {!scrolled && !isMobile && (
+              <Text
+                color="white"
+                fontFamily="'Lobster',cursive"
+                css={titleStyle}
+              >
+                Remote Software Engineer &#183; Good vibes
+              </Text>
             )}
           </Box>
         </Box>
