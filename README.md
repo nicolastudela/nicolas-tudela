@@ -1,6 +1,10 @@
 # nicolas-tudela
 Personal Site. It was created to use it as a portfolio and opportunity to research about new technologies. 
 
+
+# Live site
+https://www.nicolastudela.dev/
+
 The site will mainly provide information about myself, my work experience and some sort of blog, where users can post something.
 
 **The project is still on its early stage** 
