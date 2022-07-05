@@ -1,3 +1,3 @@
 export default {
-  solariAPIUrl: 'https://api.nicolastudela.com',
+  solariAPIUrl: 'https://api.nicolastudela.it',
 }
