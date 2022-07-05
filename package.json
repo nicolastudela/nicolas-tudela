@@ -10,7 +10,7 @@
     "start": "webpack-dev-server --open --mode development"
   },
   "engines": {
-    "node": "10.x"
+    "node": "16.x"
   },
   "keywords": [],
   "author": "Nicolas Jose Tudela",
