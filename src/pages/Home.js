@@ -131,41 +131,6 @@ const Home = () => {
           </Text>
         </>
       </ContentPanel>
-      <ContentPanel color="white">
-        {({ color }) => (
-          <TitleAndSubtitle
-            subtitle="I'm here to create meaningful and lasting relationships with my clients."
-            title="LET'S BUILD SOMETHING AMAZING TOGETHER"
-            color={color}
-          />
-        )}
-      </ContentPanel>
-
-      <ContentPanel color="lightBlue">
-        {({ color }) => (
-          <TitleAndSubtitle
-            subtitle="I'm here to create meaningful and lasting relationships with my clients."
-            title="LET'S BUILD SOMETHING AMAZING TOGETHER"
-            color={color}
-          />
-        )}
-      </ContentPanel>
-
-      <ContentPanel
-        color="black"
-        backgroundImage={`url('${backgrKeyword}')`}
-        backgroundPosition="center"
-      >
-        <>
-          <TitleAndSubtitle
-            subtitle="I'm here to create meaningful and lasting relationships with my clients."
-            title="LET'S BUILD SOMETHING AMAZING TOGETHER"
-            color="allWhite"
-          />
-          <Box height="5em" />
-          <Box height="40px" />
-        </>
-      </ContentPanel>
     </>
   )
 }

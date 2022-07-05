@@ -1,35 +1,14 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { TitleAndSubtitle, ContentPanel } from 'components'
 import { Box, Typography } from '@smooth-ui/core-em'
-import { Space } from 'uiCommons'
+import { Space, Link } from 'uiCommons'
 import { useClientDeviceType } from 'components/utils/useClientDeviceType'
-import { gmailLogo, skypeLogo, backgrKeyword } from 'images'
-import linkedinBadgeCreator from '../utils/linkedinBadgeCreator'
-
-const LinkedinBox = () => {
-  useEffect(() => {
-    linkedinBadgeCreator(window)
-  }, [])
-
-  return (
-    <div
-      className="LI-profile-badge"
-      data-version="v1"
-      data-size="large"
-      data-locale="es_ES"
-      data-type="horizontal"
-      data-theme="light"
-      data-vanity="nicolas-tudela-85455a2b"
-    >
-      <a
-        className="LI-simple-link"
-        href="https://ar.linkedin.com/in/nicolas-tudela-85455a2b?trk=profile-badge"
-      >
-        Nicolas Tudela
-      </a>
-    </div>
-  )
-}
+import { backgrKeyword } from 'images'
+import MailIcon from '@material-ui/icons/Mail'
+import Mobile from '@material-ui/icons/MobileFriendly'
+import LinkedIn from '@material-ui/icons/LinkedIn'
+import GitHub from '@material-ui/icons/GitHub'
+import Instagram from '@material-ui/icons/Instagram'
 
 const Contact = () => {
   const { isMobile } = useClientDeviceType()
@@ -40,51 +19,77 @@ const Contact = () => {
           <TitleAndSubtitle title="Conect with me today" color={color} />
         )}
       </ContentPanel>
-      <ContentPanel
+      <Box
         display="flex"
-        flexDirection="row"
-        alignItems="center"
-        color="white"
-        justifyContent="space-between"
+        flexDirection="column"
+        maxWidth="1290px"
+        height={{ sm: '32rem', md: 'unset' }}
+        m="auto"
+        style={{ gap: '2.5rem' }}
+        justifyContent="center"
       >
-        <LinkedinBox />
-        <Box>
-          <a
+        <Box display="flex" style={{ gap: '1rem' }}>
+          <MailIcon style={{ fontSize: 60 }} />
+          <Link
             tabIndex="0"
-            display="block"
             target="_blank"
             rel="noopener noreferrer"
             href="mailto:nicolastudela@gmail.com"
+            color="black"
           >
-            <img
-              alt="gmailLogo"
-              src={gmailLogo}
-              style={{
-                height: '256px',
-                width: '256px',
-              }}
-            />
-          </a>
+            nicolastudela@gmail.com
+          </Link>
         </Box>
-        <Box>
-          <a
+        <Box display="flex" style={{ gap: '1rem' }}>
+          <Mobile style={{ fontSize: 60 }} />
+          <Link
             tabIndex="0"
-            display="block"
+            href="https://wa.me/+5191153254124?text=Hola%20quiero%20averiguar%20sobre%20calacabana"
+            aria-label="Contact me on whatsapp"
+            isExternal
+            rel="noopener noreferrer"
+            color="black"
+          >
+            +549115325-4124 / +393313872735
+          </Link>
+        </Box>
+        <Box display="flex" style={{ gap: '1rem' }}>
+          <LinkedIn style={{ fontSize: 60 }} />
+          <Link
+            tabIndex="0"
             target="_blank"
             rel="noopener noreferrer"
-            href="https://join.skype.com/invite/BfPs9S9gdahK"
+            href="https://www.linkedin.com/in/nicolas-tudela-85455a2b/"
+            color="black"
           >
-            <img
-              alt="skypeLogo"
-              src={skypeLogo}
-              style={{
-                height: '256px',
-                width: '256px',
-              }}
-            />
-          </a>
+            LinkedIn
+          </Link>
         </Box>
-      </ContentPanel>
+        <Box display="flex" style={{ gap: '1rem' }}>
+          <GitHub style={{ fontSize: 60 }} />
+          <Link
+            tabIndex="0"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/nicolastudela"
+            color="black"
+          >
+            GitHub
+          </Link>
+        </Box>
+        <Box display="flex" style={{ gap: '1rem' }}>
+          <Instagram style={{ fontSize: 60 }} />
+          <Link
+            tabIndex="0"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.instagram.com/tudelacade/"
+            color="black"
+          >
+            Instagram
+          </Link>
+        </Box>
+      </Box>
       <ContentPanel
         color="black"
         backgroundImage={`url('${backgrKeyword}')`}
