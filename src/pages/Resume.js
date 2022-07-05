@@ -194,9 +194,9 @@ const Resume = () => {
                 title="THE ONLY SOURCE OF KNOWLEDGE IS EXPERIENCE"
                 color={color}
               />
-              <Link color="darkBlue" href={resumePdf}>
+              {/* <Link color="darkBlue" href={resumePdf}>
                 Download resume
-              </Link>
+              </Link> */}
             </Box>
           </>
         )}
